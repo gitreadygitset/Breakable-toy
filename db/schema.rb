@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_02_004452) do
+ActiveRecord::Schema.define(version: 2021_05_02_154459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,13 +24,14 @@ ActiveRecord::Schema.define(version: 2021_05_02_004452) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "role", default: "supported user", null: false
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  create_table "video_shares", force: :cascade do |t|
-    t.bigint "user_id", null: false
+  create_table "video_shares", id: false, force: :cascade do |t|
     t.bigint "video_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_video_shares_on_user_id"
