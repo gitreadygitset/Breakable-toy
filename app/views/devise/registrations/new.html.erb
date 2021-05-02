@@ -26,6 +26,11 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
+  <div class="field">
+    <%= f.label :role, "This account is for:" %><br />
+    <%= f.select :role, [["An independent user (e.g. teacher, therapist)", 'independent user'], ["A supported user (e.g. student, client, learner)", 'supported user']], selected: 'independent user' %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
