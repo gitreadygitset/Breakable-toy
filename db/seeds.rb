@@ -7,6 +7,6 @@ patrick.save!
 devin = User.new(username: "devin", password: "devin1", email: "devin@devin.com", role: "supported user")
 devin.save!
 
-Video.find_or_create_by!(video_url: "video.com", title: "a video", user: User.find_by(username: "patrickqui"))
+Video.find_or_create_by!(video_url: "video.com", title: "a video", user: User.find_by(username: "patrick"))
 
 VideoShare.find_or_create_by!(user_id: 1, video_id: 1)
