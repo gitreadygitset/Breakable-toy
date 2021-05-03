@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
-
-  root 'static_pages#index'
+  root "homes#authenticated"
+  get "/videos", to: "homes#authenticated"
   
-  get "/videos", to: "static_pages#index"
-  get "/videos/:id", to: "static_pages#index"
-
   devise_for :users
    
   namespace :api do
