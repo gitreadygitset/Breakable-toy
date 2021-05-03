@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  root 'homes#index'
-  devise_for :users
+  root "homes#authenticated"
+  get "/videos", to: "homes#authenticated"
   
+  devise_for :users
+   
   namespace :api do
     namespace :v1 do
       resources :videos, only: [:index]

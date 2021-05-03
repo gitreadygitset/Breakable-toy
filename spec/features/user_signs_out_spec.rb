@@ -7,7 +7,7 @@ feature 'user signs out' do
 
     visit new_user_session_path
 
-    fill_in 'Email', with: user.email
+    fill_in 'Username', with: user.username
     fill_in 'Password', with: user.password
 
     click_button 'Log in'
@@ -15,7 +15,7 @@ feature 'user signs out' do
     expect(page).to have_content('Signed in successfully')
 
     click_link 'Sign Out'
-    expect(page).to have_content('Signed out successfully')
+    expect(page).to have_content('You need to sign in')
   end
 
   scenario 'unauthenticated user attempts to sign out' do

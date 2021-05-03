@@ -1,7 +1,13 @@
 import React from 'react'
+import { BrowserRouter, Route } from 'react-router-dom'
+import VideosIndexContainer from "./videosIndex"
 
 export const App = (props) => {
-  return (<h1>Make It So React</h1>)
+  return (
+    <BrowserRouter>
+      <Route path="/videos" component={VideosIndexContainer}/>
+    </BrowserRouter>
+  )
 }
 
 export default App
