@@ -6,7 +6,7 @@ feature 'user signs in' do
 
     visit new_user_session_path
 
-    fill_in 'Email', with: user.email
+    fill_in 'Username', with: user.username
     fill_in 'Password', with: user.password
 
     click_button 'Log in'
@@ -19,7 +19,7 @@ feature 'user signs in' do
     visit new_user_session_path
 
     click_button 'Log in'
-    expect(page).to have_content('Invalid Email or password')
+    expect(page).to have_content('Invalid Username or password')
     expect(page).to_not have_content('Sign Out')
   end
 end
