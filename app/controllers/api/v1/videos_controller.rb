@@ -4,4 +4,5 @@ class Api::V1::VideosController < ApplicationController
   def index
     render json: current_user.videos
   end
+
 end
