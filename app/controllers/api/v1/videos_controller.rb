@@ -1,5 +1,5 @@
 class Api::V1::VideosController < ApplicationController
-  before_action :authenticate_user, except: [:create]
+  before_action :authenticate_user
   skip_before_action :verify_authenticity_token
 
   def index
@@ -8,7 +8,6 @@ class Api::V1::VideosController < ApplicationController
 
   def create
     video = Video.new(title: params["title"], video_url: params["video_url"], user: current_user)
-    binding.pry
     if video.save
       render json: video
     else
