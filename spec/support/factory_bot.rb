@@ -10,7 +10,7 @@ FactoryBot.define do
   end
 
   factory :video do
-    video_url { https://launch-video-playground.s3.amazonaws.com/uploads/IMG_1402.MOV }
-    title { "Here is a video" }
+    video_url { fixture_file_upload 'spec/fixtures/IMG_1404-1.mov', 'video/mov' }
+    title { 'test video' }
   end
 end

@@ -8,10 +8,11 @@ class Api::V1::VideosController < ApplicationController
 
   def create
     video = Video.new(title: params["title"], video_url: params["video_url"], user: current_user)
+    binding.pry
     if video.save
       render json: video
     else
-      render json: {error:["Your video could not be saved"]}
+      render json: { error: video.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
