@@ -20,7 +20,6 @@ const NewVideoForm = ({setVideoFormData, videoFormData, addVideo})=> {
   }
 
   const validForSubmission = () => {
-    debugger
     let submitErrors = [];
       if (videoFormData["title"].trim() === "") {
         submitErrors = [
@@ -28,7 +27,7 @@ const NewVideoForm = ({setVideoFormData, videoFormData, addVideo})=> {
           "You must provide a title"
         ];
       }
-      if (videoFormData["video_url"].trim()===""){
+      if (videoFormData["video_url"]===""){
         submitErrors = [
           ...submitErrors,
           "Please upload a file"

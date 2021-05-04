@@ -9,7 +9,6 @@ class Api::V1::VideosController < ApplicationController
   def create
     video = Video.new(title: params["title"], video_url: params["video_url"], user: current_user)
     if video.save
-      binding.pry
       render json: video
     else
       render json: {error:["Your video could not be saved"]}
@@ -22,9 +21,5 @@ class Api::V1::VideosController < ApplicationController
     if !user_signed_in?
       render json: {error: ["You need to be signed in first"]}
     end
-  end
-
-  def video_params
-    binding.pry
   end
 end

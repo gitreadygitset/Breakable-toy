@@ -32,7 +32,7 @@ const VideosIndexContainer = (props) => {
     body.append('title', videoFormData.title)
     body.append('video_url', videoFormData.video_url)
     try {
-      let addVideoResponse = await fetch('api/v1/videos', {
+      const addVideoResponse = await fetch('api/v1/videos', {
         method: "POST",
         headers: {
           credentials: "include",
@@ -40,7 +40,8 @@ const VideosIndexContainer = (props) => {
         body: body
       })
       if(addVideoResponse.ok) {
-        setVideos([...videos, addVideoResponse])
+        const parsedAddVideoResponse = await addVideoResponse.json();
+        setVideos([...videos, parsedAddVideoResponse.video]);
       } else {
         throw new Error(`${addVideoResponse.status}: ${addVideoResponse.statusText}`)
       }
@@ -51,7 +52,7 @@ const VideosIndexContainer = (props) => {
   const videoComponents = videos.map(video => {
     return <VideoTile key={video.id} video={video}/>
   })
-
+ 
   return (
     <div>
       <div>
