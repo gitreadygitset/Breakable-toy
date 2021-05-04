@@ -4,7 +4,6 @@ import VideosIndexContainer from "./videosIndex"
 import VideoShowContainer from "./videoShowContainer"
 
 export const App = (props) => {
-  debugger
   return (
     <BrowserRouter>
       <Switch>

@@ -55,10 +55,10 @@ const VideosIndexContainer = (props) => {
  
   return (
     <div>
-      <div>
+      <div className="video-grid">
         {videoComponents}
       </div> 
-      <div>
+      <div className="video-form">
         <NewVideoForm 
         setVideoFormData={setVideoFormData} 
         videoFormData={videoFormData} 

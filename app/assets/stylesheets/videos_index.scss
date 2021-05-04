@@ -1,0 +1,22 @@
+.video-grid {
+  display: inline-grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  border: 1px solid red;
+  width: 65%;
+}
+.video-tile {
+  border: 1px solid blue;
+  width: 100%;
+}
+.grid-image-container {
+  border: 1px solid green;
+  aspect-ratio: 1;
+  overflow: hidden;
+  margin: auto;
+  width: 80%;
+}
+video {
+  display: block;
+  width: 100%;
+  max-height: 80%;
+}
