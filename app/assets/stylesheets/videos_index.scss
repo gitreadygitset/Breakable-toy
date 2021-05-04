@@ -6,7 +6,6 @@
 .video-grid {
   display: inline-grid;
   grid-template: repeat(3, 1fr) / repeat(3, 1fr);
-  // border: 1px solid red;
   width: 60%;
   grid-gap: 1rem;
 }
@@ -15,7 +14,6 @@
   width: 100%;
   text-align: center;
   .grid-image-container {
-    //border: 3px solid green;
     aspect-ratio: 1;
     overflow: hidden;
     margin: auto;
@@ -24,7 +22,6 @@
       display: block;
       width: 100%;
       height: auto;
-      // border: 1px solid purple;
     }
   }
 }
@@ -32,7 +29,6 @@
 .video-form {
   display: inline-block;
   width: 30%;
-  // border: 1px solid orange;
 }
 
 h1 {
