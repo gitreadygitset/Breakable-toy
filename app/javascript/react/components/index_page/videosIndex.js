@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import VideoTile from './VideoTile'
-import NewVideoForm from './NewVideoForm'
+import NewVideoForm from '../NewVideoForm'
 
 const VideosIndexContainer = (props) => {
   const [videos, setVideos] = useState([])

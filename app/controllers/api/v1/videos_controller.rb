@@ -15,6 +15,10 @@ class Api::V1::VideosController < ApplicationController
     end
   end
 
+  def show
+    video = Video.find(params[:id])
+    render json: video
+  end
   private 
 
   def authenticate_user
