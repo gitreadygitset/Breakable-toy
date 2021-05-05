@@ -1,11 +1,8 @@
 class Video < ApplicationRecord
-  
-  belongs_to :user
-  has_and_belongs_to_many :shared_users, class_name: "User", join_table: "video_shares", foreign_key: "video_id", association_foreign_key: "user_id"
+  has_many :video_shares
+  has_many :users, through: :video_shares
 
-  def creator
-    User.find(user_id)
-  end
+  belongs_to :uploader, class_name: 'User'
 
   mount_uploader :video_url, VideoUploader
 
