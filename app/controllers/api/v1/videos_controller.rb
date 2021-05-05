@@ -3,11 +3,11 @@ class Api::V1::VideosController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    render json: current_user.videos
+    render json: current_user.uploads
   end
 
   def create
-    video = Video.new(title: params["title"], video_url: params["video_url"], user: current_user)
+    video = Video.new(title: params["title"], video_url: params["video_url"], uploader: current_user)
     if video.save
       render json: video
     else

@@ -1,7 +1,7 @@
 edna = User.new(username: "edna", password: "edna11", email: "edna@edna.com", role: "supported user")
 edna.save
 
-samantha = User.new(username: "samantha", password: "patrick", email: "samantha.@samantha.com", role: "independent user")
+samantha = User.new(username: "samantha", password: "password", email: "samantha.@samantha.com", role: "independent user")
 samantha.save
 
 devin = User.new(username: "devin", password: "devin1", email: "devin@devin.com", role: "supported user")
