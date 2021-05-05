@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe Api::V1::VideosController, type: :controller do
   let!(:user1) { FactoryBot.create(:user, role: 'independent user') }
   let!(:user2) { FactoryBot.create(:user, username: 'guest2', role: 'independent user' )}
-  let!(:video1) { FactoryBot.create(:video, user: user1) }
-  let!(:video2) { FactoryBot.create(:video, user: user1, title: 'another test video') }
+  let!(:video1) { FactoryBot.create(:video, uploader: user1) }
+  let!(:video2) { FactoryBot.create(:video, uploader: user1, title: 'another test video') }
 
   describe "GET#index" do
     it "Should return a list of videos uploaded by the current user" do
