@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ErrorList from '../ErrorList'
 
 const NewVideoForm = ({setVideoFormData, videoFormData, addVideo})=> {
-  const [formErrors, setFormErrors] = useState({})
+  const [formErrors, setFormErrors] = useState([])
 
   const handleChange = (event) => {
     setVideoFormData({
