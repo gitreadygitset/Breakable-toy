@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import VideosIndexContainer from "./videosIndex"
-import VideoShowContainer from "./videoShowContainer"
+import VideosIndexContainer from "./index_page/videosIndex"
+import VideoShowContainer from "./video_show_page/videoShowContainer"
 
 export const App = (props) => {
   return (

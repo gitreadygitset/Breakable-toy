@@ -4,6 +4,7 @@ import VideoSharesContainer from './VideoSharesContainer'
 
 const VideoShowContainer = (props) => {
   const videoId = props.match.params.id
+  debugger
   const [video, setVideo] = useState({
     title: '',
     video_url: {
@@ -16,6 +17,7 @@ const VideoShowContainer = (props) => {
       let videoResponse = await fetch(`/api/v1/videos/${videoId}`)
       if(videoResponse.ok){
         videoResponse = await videoResponse.json()
+        debugger
         setVideo(videoResponse.video)
       } else {
         throw new Error(`${videoResponse.status}: ${videoResponse.statusText}`)
@@ -26,6 +28,7 @@ const VideoShowContainer = (props) => {
   }
 
   useEffect(() => {
+    debugger
     fetchVideo()
   }, [])
 
