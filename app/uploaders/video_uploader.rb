@@ -7,7 +7,7 @@ class VideoUploader < CarrierWave::Uploader::Base
   end
 
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "uploads/video/video_url/#{model.id}"
   end
 
   # Process files as they are uploaded:
