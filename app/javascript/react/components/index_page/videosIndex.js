@@ -57,9 +57,9 @@ const VideosIndexContainer = (props) => {
     <div>
       <h1>Your Videos</h1>
       <div className="videos-index"> 
-        <div className="video-grid">
-          {videoComponents}
-        </div> 
+          <div className="video-grid">
+            {videoComponents}
+          </div> 
         <div className="video-form">
           <NewVideoForm 
           setVideoFormData={setVideoFormData} 

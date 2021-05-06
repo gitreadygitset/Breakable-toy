@@ -41,7 +41,7 @@ const VideoQuestionsContainer = ({setFormErrors, questions, addQuestion}) => {
   }
   
   return (
-    <div>
+    <div className="questions-open">
       <h3>Current questions:</h3>
       <ul>
         {questionsList}

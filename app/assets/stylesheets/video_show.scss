@@ -1,0 +1,39 @@
+.video-show-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  div {
+    padding: 1rem;
+  }
+  .video-container {
+    width: 80%;
+    video {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
+  }
+  .question-display {
+    max-width: 40%;
+  }
+}
+.show-buttons {
+  display: flex;
+  justify-content: start;
+}
+
+.errors {
+  text-align: center;
+}
+.forms {
+  display: flex;
+  justify-content: center;
+  .shared-users,
+  .questions {
+    flex-basis: 100%;
+    width: 80%;
+    padding: 2rem;
+  }
+}
