@@ -10,7 +10,7 @@ class VideoUploader < CarrierWave::Uploader::Base
     if Rails.env.development?
       "uploads/video/video_url/#{model.id}"
     elsif Rails.env.test?
-      "spec/test_videos"
+      "spec/test_videos/#{model.id}"
     end
   end
 
