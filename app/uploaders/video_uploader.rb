@@ -9,8 +9,8 @@ class VideoUploader < CarrierWave::Uploader::Base
   def store_dir
     if Rails.env.development?
       "uploads/video/video_url/#{model.id}"
-    else
-      "spec/uploads"
+    elsif Rails.env.test?
+      "spec/test_videos"
     end
   end
 
