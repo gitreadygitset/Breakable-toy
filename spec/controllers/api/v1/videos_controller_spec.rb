@@ -19,7 +19,6 @@ RSpec.describe Api::V1::VideosController, type: :controller do
     end
 
     it "Should redirect to the login page if the user is not signed in" do
-      
       get :index
       returned_json = JSON.parse(response.body)
 
@@ -32,6 +31,7 @@ RSpec.describe Api::V1::VideosController, type: :controller do
       sign_in user1
       get :show, params: {id: video1.id}
       returned_json = JSON.parse(response.body)
+      
       expect(response.status).to eq 200
       expect(response.content_type).to eq("application/json")
       expect(returned_json["video"]["title"]).to eq(video1.title)
@@ -57,6 +57,4 @@ RSpec.describe Api::V1::VideosController, type: :controller do
       expect(returned_json["video"]["title"]).to eq("uploaded video")
     end
   end
-
-  
 end
