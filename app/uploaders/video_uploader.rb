@@ -7,7 +7,11 @@ class VideoUploader < CarrierWave::Uploader::Base
   end
 
   def store_dir
-    "uploads/video/video_url/#{model.id}"
+    if Rails.env.development?
+      "uploads/video/video_url/#{model.id}"
+    elsif Rails.env.test?
+      "spec/test_videos/#{model.id}"
+    end
   end
 
   def extension_allowlist
