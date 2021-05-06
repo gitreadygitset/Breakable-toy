@@ -109,9 +109,11 @@ const VideoShowContainer = (props) => {
         <div className="video-container">
           <video src={video.video_url?.url} controls />
         </div>
+        {questions.length > 0 ?
         <div className="question-display">
-          <p>Example question that is about this long, do you know?</p>
+           <p>{questions[0].body}</p> 
         </div>
+        : null}
       </div>
       <div className="editing-container">
         <div className="show-buttons">
