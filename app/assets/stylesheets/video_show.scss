@@ -19,8 +19,10 @@
   }
   .question-display {
     border: 1px solid blue;
-    font-size: 1.5rem;
     max-width: 40%;
+    p {
+      width: 90%;
+    }
   }
 }
 .show-buttons {
@@ -39,5 +41,6 @@
     flex-basis: 100%;
     width: 80%;
     border: 1px solid purple;
+    padding: 2rem;
   }
 }

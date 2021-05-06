@@ -8,6 +8,7 @@
   grid-template: repeat(3, 1fr) / repeat(3, 1fr);
   width: 60%;
   grid-gap: 1rem;
+  border: 1px solid red;
 }
 .video-tile {
   border: 3px solid blue;
@@ -29,4 +30,5 @@
 .video-form {
   display: inline-block;
   width: 30%;
+  border: 1px solid purple;
 }
