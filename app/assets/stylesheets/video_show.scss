@@ -1,0 +1,43 @@
+.video-show-container {
+  border: 1px solid red;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  div {
+    padding: 1rem;
+  }
+  .video-container {
+    border: 1px solid green;
+    width: 80%;
+    video {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
+  }
+  .question-display {
+    border: 1px solid blue;
+    font-size: 1.5rem;
+    max-width: 40%;
+  }
+}
+.show-buttons {
+  display: flex;
+  justify-content: start;
+  border: 1px solid red;
+}
+.errors {
+  text-align: center;
+}
+.forms {
+  display: flex;
+  justify-content: center;
+  .shared-users,
+  .questions {
+    flex-basis: 100%;
+    width: 80%;
+    border: 1px solid purple;
+  }
+}

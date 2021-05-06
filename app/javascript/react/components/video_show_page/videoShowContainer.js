@@ -6,10 +6,13 @@ import ErrorList from '../ErrorList'
 
 const VideoShowContainer = (props) => {
   const videoId = props.match.params.id;
+
   const [video, setVideo] = useState({});
   const [users, setUsers] = useState([]);
   const [questions, setQuestions] = useState([]);
   const [formErrors, setFormErrors] = useState([]);
+  const [sharesVisibility, setSharesVisibility] = useState(false);
+  const [questionsVisibility, setQuestionsVisibility] = useState(false);
 
   const fetchVideo = async() => {
     try {
@@ -75,7 +78,26 @@ const VideoShowContainer = (props) => {
       console.error(`Error in fetch: ${error.message}`)
     }
   }
+  
+  const toggleShares = (event) => {
+    if(!sharesVisibility){
+      setSharesVisibility(true);
+      event.currentTarget.innerText = "Hide shared users"
+    } else {
+      setSharesVisibility(false);
+      event.currentTarget.innerText = "See and add shared users"
+    }
+  }
 
+  const toggleQuestions = (event) => {
+    if(!questionsVisibility){
+      setQuestionsVisibility(true);
+      event.currentTarget.innerText = "Hide questions"
+    } else {
+      setQuestionsVisibility(false);
+      event.currentTarget.innerText = "See and add questions"
+    }
+  }
   useEffect(() => {
     fetchVideo()
   }, [])
@@ -83,19 +105,42 @@ const VideoShowContainer = (props) => {
   return (
     <div>
       <h1>{video.title}</h1>
-      <video src={video.video_url?.url} controls />
-      <div>
-        <ErrorList errors={formErrors}/>
-        <VideoSharesContainer 
-          users={users} 
-          shareVideo={shareVideo}
-          setFormErrors={setFormErrors}
-          />
-          <VideoQuestionsContainer 
-          questions={questions}
-          addQuestion={addQuestion}
-          setFormErrors={setFormErrors}
-          />
+      <div className="video-show-container">
+        <div className="video-container">
+          <video src={video.video_url?.url} controls />
+        </div>
+        <div className="question-display">
+          <p>Example question that is about this long, do you know?</p>
+        </div>
+      </div>
+      <div className="editing-container">
+        <div className="show-buttons">
+          <button id="sharesToggle" onClick={toggleShares}>See and add shared users</button>
+          <button id="questionsToggle" onClick={toggleQuestions}>See and add questions</button>
+        </div>
+        <div className="errors">
+          <ErrorList errors={formErrors}/>
+        </div>
+        <div className="forms">
+        {sharesVisibility ?
+          <div className="shared-users">  
+              <VideoSharesContainer 
+                users={users} 
+                shareVideo={shareVideo}
+                setFormErrors={setFormErrors}
+              />   
+          </div>
+          : null}
+          {questionsVisibility ?
+          <div className="questions">
+            <VideoQuestionsContainer 
+            questions={questions}
+            addQuestion={addQuestion}
+            setFormErrors={setFormErrors}
+            /> 
+          </div>
+          : null}  
+        </div>
       </div>
       <Link to='/videos'>Back to my videos list</Link>
     </div>
