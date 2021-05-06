@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe Api::V1::VideosController, type: :controller do
   let!(:user1) { FactoryBot.create(:user, role: 'independent user') }
   let!(:user2) { FactoryBot.create(:user, username: 'guest2', role: 'independent user' )}
