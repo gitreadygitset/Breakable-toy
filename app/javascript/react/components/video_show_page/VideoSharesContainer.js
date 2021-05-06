@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import ErrorList from '../ErrorList'
 
-const VideoSharesContainer = ({users, shareVideo, formErrors, setFormErrors}) => {
+const VideoSharesContainer = ({users, shareVideo, setFormErrors}) => {
   const [shareFormData, setShareFormData] = useState({username: ''})
 
   const usersList = users?.map(user => {
@@ -34,7 +33,6 @@ const VideoSharesContainer = ({users, shareVideo, formErrors, setFormErrors}) =>
     }
     setShareFormData({username: ''})
   }
-
   
   return (
     <div>
@@ -43,18 +41,20 @@ const VideoSharesContainer = ({users, shareVideo, formErrors, setFormErrors}) =>
         {usersList}
       </ul>
       <div>
-        <form onSubmit={handleShare}>
-          <ErrorList errors={formErrors}/>
-          <label htmlFor="username">Enter the username of the person you'd like to share with</label>
-          <input 
-            type="text" 
-            id="username" 
-            name="username"
-            onChange={handleChange} 
-            value={shareFormData.username}
-            />
-          <button type="submit" >Share this video</button>
-        </form>
+        <div>
+          <h3>Share this video with another user</h3>
+          <form onSubmit={handleShare}>
+            <label htmlFor="username">Enter the username of the person you'd like to share with</label>
+            <input 
+              type="text" 
+              id="username" 
+              name="username"
+              onChange={handleChange} 
+              value={shareFormData.username}
+              />
+            <button type="submit" >Share this video</button>
+          </form>
+        </div>
       </div>
     </div>
   )

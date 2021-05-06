@@ -1,4 +1,5 @@
 class Api::V1::VideoSharesController < ApplicationController
+  before_action :authenticate_user!
 
   def create
     user = User.find_by(username: params[:username])
