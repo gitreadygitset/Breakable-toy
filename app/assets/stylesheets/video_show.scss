@@ -1,5 +1,4 @@
 .video-show-container {
-  border: 1px solid red;
   width: 100%;
   display: flex;
   justify-content: space-around;
@@ -8,7 +7,6 @@
     padding: 1rem;
   }
   .video-container {
-    border: 1px solid green;
     width: 80%;
     video {
       display: block;
@@ -18,18 +16,14 @@
     }
   }
   .question-display {
-    border: 1px solid blue;
     max-width: 40%;
-    p {
-      width: 90%;
-    }
   }
 }
 .show-buttons {
   display: flex;
   justify-content: start;
-  border: 1px solid red;
 }
+
 .errors {
   text-align: center;
 }
@@ -40,7 +34,6 @@
   .questions {
     flex-basis: 100%;
     width: 80%;
-    border: 1px solid purple;
     padding: 2rem;
   }
 }
