@@ -17,7 +17,11 @@ class Api::V1::VideosController < ApplicationController
 
   def show
     video = Video.find(params[:id])
-    render json: video
+    users = video.users
+    render json: {
+      video: VideoSerializer.new(video),
+      users: users
+    }
   end
   private 
 

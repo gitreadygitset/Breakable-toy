@@ -5,6 +5,7 @@ RSpec.describe Api::V1::VideosController, type: :controller do
   let!(:user2) { FactoryBot.create(:user, username: 'guest2', role: 'independent user' )}
   let!(:video1) { FactoryBot.create(:video, uploader: user1) }
   let!(:video2) { FactoryBot.create(:video, uploader: user1, title: 'another test video') }
+  let!(:video_share1) { VideoShare.create(user: user2, video: video1)}
 
   describe "GET#index" do
     it "Should return a list of videos uploaded by the current user" do
@@ -15,6 +16,26 @@ RSpec.describe Api::V1::VideosController, type: :controller do
       expect(returned_json["videos"].length).to eq(2)
       expect(returned_json["videos"][0]["title"]).to eq("test video")
       expect(returned_json["videos"][1]["title"]).to eq("another test video")
+    end
+
+    it "Should redirect to the login page if the user is not signed in" do
+      get :index
+      returned_json = JSON.parse(response.body)
+
+      expect(returned_json["error"][0]).to eq("You need to be signed in first")
+    end
+  end
+
+  describe "GET#show" do
+    it "Should return the correct video" do
+      sign_in user1
+      get :show, params: {id: video1.id}
+      returned_json = JSON.parse(response.body)
+      
+      expect(response.status).to eq 200
+      expect(response.content_type).to eq("application/json")
+      expect(returned_json["video"]["title"]).to eq(video1.title)
+      expect(returned_json["users"].length).to eq(1)
     end
   end
 
@@ -33,8 +54,6 @@ RSpec.describe Api::V1::VideosController, type: :controller do
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq("application/json")
-      expect(returned_json).to be_kind_of(Hash)
-      expect(returned_json).to_not be_kind_of(Array)
       expect(returned_json["video"]["title"]).to eq("uploaded video")
     end
   end
