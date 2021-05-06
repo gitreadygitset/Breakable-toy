@@ -9,7 +9,7 @@ class Api::V1::VideoSharesController < ApplicationController
     else
       share = VideoShare.new(user: user, video: video)
       if share.save
-        render json: share.user
+        render json: user
       else
         render json: { error: share.errors.full_messages }
       end
