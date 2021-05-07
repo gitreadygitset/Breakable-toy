@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import VideoSharesContainer from './VideoSharesContainer'
 import VideoQuestionsContainer from './VideoQuestionsContainer'
 import ErrorList from '../ErrorList'
+import QuestionDisplay from './QuestionDisplay'
+import useVideoPause from '../../useEffect/useVideoPause'
 
 const VideoShowContainer = (props) => {
   const videoId = props.match.params.id;
@@ -13,6 +15,7 @@ const VideoShowContainer = (props) => {
   const [formErrors, setFormErrors] = useState([]);
   const [sharesVisibility, setSharesVisibility] = useState(false);
   const [questionsVisibility, setQuestionsVisibility] = useState(false);
+  const targetVideo = useRef(null);
 
   const fetchVideo = async() => {
     try {
@@ -21,7 +24,7 @@ const VideoShowContainer = (props) => {
         videoResponse = await videoResponse.json()
         setVideo(videoResponse.video);
         setUsers(videoResponse.users);
-        setQuestions(videoResponse.questions);
+        return setQuestions(videoResponse.questions);
       } else {
         throw new Error(`${videoResponse.status}: ${videoResponse.statusText}`)
       }
@@ -68,7 +71,6 @@ const VideoShowContainer = (props) => {
         body: JSON.stringify(formData)
       })
       if(addQuestionResponse.ok) {
-      
         const parsedAddQuestionResponse = await addQuestionResponse.json();
         setQuestions([...questions, parsedAddQuestionResponse]) 
       } else {
@@ -101,17 +103,25 @@ const VideoShowContainer = (props) => {
   useEffect(() => {
     fetchVideo()
   }, [])
+  
+  const timesArray = () => {
+    let timesArray = questions?.filter(question => question.vid_timestamp).map(question => question.vid_timestamp)
+    return timesArray.sort((a,b) => a-b)
+  }
+  
+  useVideoPause(targetVideo, timesArray())
 
   return (
     <div>
       <h1>{video.title}</h1>
       <div className="video-show-container">
         <div className="video-container">
-          <video src={video.video_url?.url} controls />
+          <video src={video.video_url?.url} controls preload="metadata" id="video" ref={targetVideo}/>
+          <span id="time-display"></span>
         </div>
         {questions.length > 0 ?
         <div className="question-display">
-           <p>{questions[0].body}</p> 
+           <QuestionDisplay questions={questions}/>
         </div>
         : null}
       </div>
@@ -126,19 +136,20 @@ const VideoShowContainer = (props) => {
         <div className="forms">
         {sharesVisibility ?
           <div className="shared-users">  
-              <VideoSharesContainer 
-                users={users} 
-                shareVideo={shareVideo}
-                setFormErrors={setFormErrors}
-              />   
+            <VideoSharesContainer 
+              users={users} 
+              shareVideo={shareVideo}
+              setFormErrors={setFormErrors}
+            />   
           </div>
           : null}
           {questionsVisibility ?
           <div className="questions">
             <VideoQuestionsContainer 
-            questions={questions}
-            addQuestion={addQuestion}
-            setFormErrors={setFormErrors}
+              questions={questions}
+              addQuestion={addQuestion}
+              setFormErrors={setFormErrors}
+              targetVideo={targetVideo}
             /> 
           </div>
           : null}  

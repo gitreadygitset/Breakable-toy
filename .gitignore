@@ -30,3 +30,5 @@ yarn-debug.log*
 .yarn-integrity
 
 /public/uploads
+/public/spec/test_vidoes
+public/spec/uploads
