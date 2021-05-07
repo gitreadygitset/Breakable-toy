@@ -1,29 +1,48 @@
 import React, { useState } from 'react'
 
-const VideoQuestionsContainer = ({setFormErrors, questions, addQuestion}) => {
+const VideoQuestionsContainer = ({setFormErrors, questions, addQuestion, targetVideo}) => {
   const [questionFormData, setQuestionFormData] = useState({
     body: '', 
     vid_timestamp: ''
   })
 
   const questionsList = questions?.map(question => {
-    return <li>{question?.body} timestamp: {question?.timestamp}</li>
+    return <li><p>{question?.body}</p>
+    {question.vid_timestamp && <span>timestamp: {question?.vid_timestamp}</span>}
+    </li>
   })
 
-  const handleChange = (event) =>{
+  const handleChange = (event) => { 
     setQuestionFormData({
       ...questionFormData,
       [event.currentTarget.name]: event.currentTarget.value
     })
   }
+
+  const captureTimestamp = (event) => {
+    let updateField = "vid_timestamp";
+    let newTime = Math.floor(targetVideo.current.currentTime)
+    debugger
+    setQuestionFormData({
+      ...questionFormData,
+      [updateField]: newTime
+    })
+    debugger
+  }
+
   const validForSubmission = () => {
     let submitErrors = [];
-      if (questionFormData["body"].trim() === "" && questionFormData["vid_timestamp"].trim() === "") {
-        submitErrors = [
-          ...submitErrors,
-          "You must enter a question and/or a timestamp."
-        ];
-      }
+    if (questionFormData["body"].trim() === "" && questionFormData["vid_timestamp"] === null) {
+      submitErrors = [
+        ...submitErrors,
+        "You must enter a question and/or a timestamp."
+      ];
+    } else if (questionFormData["vid_timestamp"] && (questionFormData["vid_timestamp"] < 0 || questionFormData["vid_timestamp"]) > targetVideo.current.duration){
+      submitErrors = [
+        ...submitErrors,
+        "Your timestamp must be within the video duration"
+      ];
+    }
 
     setFormErrors(submitErrors);
     return submitErrors.length === 0;
@@ -59,6 +78,15 @@ const VideoQuestionsContainer = ({setFormErrors, questions, addQuestion}) => {
             onChange={handleChange} 
             value={questionFormData.body}
             /> 
+          <label htmlFor="timestamp">Set the video to the point at which you want to pause, and click the button below. Or, enter the timestamp(in seconds) manually.</label>
+          <button type="button" onClick={captureTimestamp}>Capture Timestamp</button>
+          <input 
+            type="number" min="0" max={targetVideo.current.duration}
+            name="vid_timestamp" 
+            value={questionFormData.vid_timestamp} 
+            onChange={handleChange}
+          />
+          
           <button type="submit">Add this question</button>
         </form>
       </div>

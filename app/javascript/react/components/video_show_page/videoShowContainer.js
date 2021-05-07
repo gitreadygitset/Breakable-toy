@@ -24,7 +24,7 @@ const VideoShowContainer = (props) => {
         videoResponse = await videoResponse.json()
         setVideo(videoResponse.video);
         setUsers(videoResponse.users);
-        setQuestions(videoResponse.questions);
+        return setQuestions(videoResponse.questions);
       } else {
         throw new Error(`${videoResponse.status}: ${videoResponse.statusText}`)
       }
@@ -71,7 +71,6 @@ const VideoShowContainer = (props) => {
         body: JSON.stringify(formData)
       })
       if(addQuestionResponse.ok) {
-      
         const parsedAddQuestionResponse = await addQuestionResponse.json();
         setQuestions([...questions, parsedAddQuestionResponse]) 
       } else {
@@ -104,9 +103,14 @@ const VideoShowContainer = (props) => {
   useEffect(() => {
     fetchVideo()
   }, [])
-
-  useVideoPause(targetVideo, [3,5,7,9]);
   
+  const timesArray = () => {
+    let timesArray = questions?.filter(question => question.vid_timestamp).map(question => question.vid_timestamp)
+    return timesArray.sort((a,b) => a-b)
+  }
+  
+  useVideoPause(targetVideo, timesArray())
+
   return (
     <div>
       <h1>{video.title}</h1>
@@ -132,19 +136,20 @@ const VideoShowContainer = (props) => {
         <div className="forms">
         {sharesVisibility ?
           <div className="shared-users">  
-              <VideoSharesContainer 
-                users={users} 
-                shareVideo={shareVideo}
-                setFormErrors={setFormErrors}
-              />   
+            <VideoSharesContainer 
+              users={users} 
+              shareVideo={shareVideo}
+              setFormErrors={setFormErrors}
+            />   
           </div>
           : null}
           {questionsVisibility ?
           <div className="questions">
             <VideoQuestionsContainer 
-            questions={questions}
-            addQuestion={addQuestion}
-            setFormErrors={setFormErrors}
+              questions={questions}
+              addQuestion={addQuestion}
+              setFormErrors={setFormErrors}
+              targetVideo={targetVideo}
             /> 
           </div>
           : null}  
