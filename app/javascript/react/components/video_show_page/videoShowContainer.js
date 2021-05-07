@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import VideoSharesContainer from './VideoSharesContainer'
 import VideoQuestionsContainer from './VideoQuestionsContainer'
@@ -14,6 +14,7 @@ const VideoShowContainer = (props) => {
   const [formErrors, setFormErrors] = useState([]);
   const [sharesVisibility, setSharesVisibility] = useState(false);
   const [questionsVisibility, setQuestionsVisibility] = useState(false);
+  const targetVideo = useRef(null);
 
   const fetchVideo = async() => {
     try {
@@ -103,17 +104,20 @@ const VideoShowContainer = (props) => {
     fetchVideo()
   }, [])
 
-  const currentTime = () => {
-    const video = document.getElementById('video');
-    document.getElementById("time-display").innerText = video.currentTime;
-  }
-
+  useEffect(() => {
+    targetVideo.current.addEventListener("timeupdate", (event) => {
+      if(event.target.currentTime > 2.0){
+        event.currentTarget.pause();
+      }
+    })
+    }, [])
+  
   return (
     <div>
       <h1>{video.title}</h1>
       <div className="video-show-container">
         <div className="video-container">
-          <video src={video.video_url?.url} controls preload="metadata" id="video" onPause={currentTime}/>
+          <video src={video.video_url?.url} controls preload="metadata" id="video" ref={targetVideo}/>
           <span id="time-display"></span>
         </div>
         {questions.length > 0 ?
