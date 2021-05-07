@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import VideoSharesContainer from './VideoSharesContainer'
 import VideoQuestionsContainer from './VideoQuestionsContainer'
 import ErrorList from '../ErrorList'
+import QuestionDisplay from './QuestionDisplay'
 
 const VideoShowContainer = (props) => {
   const videoId = props.match.params.id;
@@ -111,7 +112,7 @@ const VideoShowContainer = (props) => {
         </div>
         {questions.length > 0 ?
         <div className="question-display">
-           <p>{questions[0].body}</p> 
+           <QuestionDisplay questions={questions}/>
         </div>
         : null}
       </div>
