@@ -103,12 +103,18 @@ const VideoShowContainer = (props) => {
     fetchVideo()
   }, [])
 
+  const currentTime = () => {
+    const video = document.getElementById('video');
+    document.getElementById("time-display").innerText = video.currentTime;
+  }
+
   return (
     <div>
       <h1>{video.title}</h1>
       <div className="video-show-container">
         <div className="video-container">
-          <video src={video.video_url?.url} controls />
+          <video src={video.video_url?.url} controls preload="metadata" id="video" onPause={currentTime}/>
+          <span id="time-display"></span>
         </div>
         {questions.length > 0 ?
         <div className="question-display">
