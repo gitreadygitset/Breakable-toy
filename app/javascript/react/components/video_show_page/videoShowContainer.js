@@ -4,6 +4,7 @@ import VideoSharesContainer from './VideoSharesContainer'
 import VideoQuestionsContainer from './VideoQuestionsContainer'
 import ErrorList from '../ErrorList'
 import QuestionDisplay from './QuestionDisplay'
+import useVideoPause from '../../useEffect/useVideoPause'
 
 const VideoShowContainer = (props) => {
   const videoId = props.match.params.id;
@@ -104,13 +105,7 @@ const VideoShowContainer = (props) => {
     fetchVideo()
   }, [])
 
-  useEffect(() => {
-    targetVideo.current.addEventListener("timeupdate", (event) => {
-      if(event.target.currentTime > 2.0){
-        event.currentTarget.pause();
-      }
-    })
-    }, [])
+  useVideoPause(targetVideo, [3,5,7,9]);
   
   return (
     <div>
