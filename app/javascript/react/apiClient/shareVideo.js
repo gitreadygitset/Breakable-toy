@@ -1,6 +1,5 @@
 const shareVideo = async(formData, videoId) => {
   try {
-    debugger
     const addShareResponse = await fetch(`/api/v1/videos/${videoId}/video_shares`, {
       method: 'POST',
       headers: {
@@ -12,7 +11,6 @@ const shareVideo = async(formData, videoId) => {
     })
     if(addShareResponse.ok) {
       const parsedAddShareResponse = await addShareResponse.json();
-      debugger
       return parsedAddShareResponse;
     } else {
       throw new Error(`${addShareResponse.status}: ${addShareResponse.statusText}`)
