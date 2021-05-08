@@ -24,7 +24,7 @@ const VideoShowContainer = (props) => {
         videoResponse = await videoResponse.json()
         setVideo(videoResponse.video);
         setUsers(videoResponse.users);
-        return setQuestions(videoResponse.questions);
+        setQuestions(videoResponse.questions);
       } else {
         throw new Error(`${videoResponse.status}: ${videoResponse.statusText}`)
       }
