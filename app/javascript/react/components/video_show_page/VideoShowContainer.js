@@ -11,6 +11,7 @@ import shareVideo from '../../apiClient/shareVideo'
 const VideoShowContainer = (props) => {
   const videoId = props.match.params.id;
 
+  const [forbidden, setForbidden] = useState(false);
   const [video, setVideo] = useState({});
   const [users, setUsers] = useState([]);
   const [questions, setQuestions] = useState([]);
@@ -28,6 +29,9 @@ const VideoShowContainer = (props) => {
         setUsers(videoResponse.users);
         setQuestions(videoResponse.questions);
       } else {
+        if(videoResponse.status === 403){
+          setForbidden(true);
+        }
         throw new Error(`${videoResponse.status}: ${videoResponse.statusText}`)
       }
     } catch(error) {
@@ -80,6 +84,13 @@ const VideoShowContainer = (props) => {
   
   useVideoPause(targetVideo, timesArray())
 
+  if(forbidden){
+    return (
+      <div>
+        <p>You do not have access to this video. Please ask the video's owner to share it with you.</p>
+      </div>
+    )
+  } else {
   return (
     <div>
       <h1>{video.title}</h1>
@@ -127,5 +138,5 @@ const VideoShowContainer = (props) => {
       <Link to='/videos'>Back to my videos list</Link>
     </div>
   )
-}
+}}
 export default VideoShowContainer

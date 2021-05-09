@@ -1,5 +1,6 @@
 class Api::V1::VideoSharesController < ApplicationController
   before_action :authenticate_user!
+  before_action :authorize_user
 
   def create
     user = User.find_by(username: params[:username])
@@ -17,4 +18,12 @@ class Api::V1::VideoSharesController < ApplicationController
     end
   end
 
+  private
+
+  def authorize_user
+    video = Video.find(params[:video_id])
+    if !user_signed_in? || (current_user != video.uploader)
+      render json: { error: ["Only the original video uploader can share it"] }
+    end
+  end
 end

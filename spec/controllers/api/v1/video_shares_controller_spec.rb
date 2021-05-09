@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Api::V1::VideoSharesController, type: :controller do
   let!(:user1) { FactoryBot.create(:user) }
   let!(:user2) { FactoryBot.create(:user, username: 'guest2') }
+  let!(:user3) { FactoryBot.create(:user, username: 'guest3') }
   let!(:video1) { FactoryBot.create(:video, uploader: user1) }
   
   describe "POST#create" do
@@ -21,6 +22,20 @@ RSpec.describe Api::V1::VideoSharesController, type: :controller do
       expect(response.status).to eq 200
       expect(response.content_type).to eq("application/json")
       expect(returned_json["username"]).to eq(user2.username)
+    end
+
+    it "Should not let anyone other than the original creator share the video" do
+      sign_in user2
+      post_json = {
+        username: user2.username,
+        video_id: video1.id
+        }
+      prev_count = VideoShare.count
+      post(:create, params: post_json)
+
+      expect(VideoShare.count).to eq(prev_count)
+      returned_json = JSON.parse(response.body)
+      expect(returned_json["error"]).to eq(["Only the original video uploader can share it"])
     end
   end
 end
