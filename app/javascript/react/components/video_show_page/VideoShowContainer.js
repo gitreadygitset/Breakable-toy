@@ -5,6 +5,8 @@ import VideoQuestionsContainer from './VideoQuestionsContainer'
 import ErrorList from '../ErrorList'
 import QuestionDisplay from './QuestionDisplay'
 import useVideoPause from '../../useEffect/useVideoPause'
+import createQuestion from '../../apiClient/createQuestion'
+import shareVideo from '../../apiClient/shareVideo'
 
 const VideoShowContainer = (props) => {
   const videoId = props.match.params.id;
@@ -24,7 +26,7 @@ const VideoShowContainer = (props) => {
         videoResponse = await videoResponse.json()
         setVideo(videoResponse.video);
         setUsers(videoResponse.users);
-        return setQuestions(videoResponse.questions);
+        setQuestions(videoResponse.questions);
       } else {
         throw new Error(`${videoResponse.status}: ${videoResponse.statusText}`)
       }
@@ -34,51 +36,21 @@ const VideoShowContainer = (props) => {
   }
 
   const shareVideo = async(formData) => {
-    try {
-      const addShareResponse = await fetch(`/api/v1/videos/${videoId}/video_shares`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          credentials: 'same-origin'
-        },
-        body: JSON.stringify(formData)
-      })
-      if(addShareResponse.ok) {
-        const parsedAddShareResponse = await addShareResponse.json();
-        if(parsedAddShareResponse.error){
-          return setFormErrors([parsedAddShareResponse.error])
-        } else {
-        setUsers([...users, parsedAddShareResponse]);
-        }
-      } else {
-        throw new Error(`${addShareResponse.status}: ${addShareResponse.statusText}`)
-      }
-    } catch(error) {
-      console.error(`Error in fetch: ${error.message}`)
+    const shareResponse = await shareVideo(formData, videoId);
+    if(shareResponse.error){
+      setFormErrors([parsedAddShareResponse.error])
+    } else {
+      setUsers([...users, parsedAddShareResponse]);
     }
   }
 
+  useEffect(() => {
+    fetchVideo()
+  }, [])
+
   const addQuestion = async(formData) => {
-    try {
-      const addQuestionResponse = await fetch(`/api/v1/videos/${videoId}/questions`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          credentials: 'same-origin'
-        },
-        body: JSON.stringify(formData)
-      })
-      if(addQuestionResponse.ok) {
-        const parsedAddQuestionResponse = await addQuestionResponse.json();
-        setQuestions([...questions, parsedAddQuestionResponse]) 
-      } else {
-        throw new Error(`${addQuestionResponse.status}: ${addQuestionResponse.statusText}`)
-      }
-    } catch(error) {
-      console.error(`Error in fetch: ${error.message}`)
-    }
+    const addQuestionResponse = await createQuestion(formData, videoId);
+    setQuestions([...questions, addQuestionResponse])    
   }
   
   const toggleShares = (event) => {
@@ -100,9 +72,6 @@ const VideoShowContainer = (props) => {
       event.currentTarget.innerText = "See and add questions"
     }
   }
-  useEffect(() => {
-    fetchVideo()
-  }, [])
   
   const timesArray = () => {
     let timesArray = questions?.filter(question => question.vid_timestamp).map(question => question.vid_timestamp)

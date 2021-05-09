@@ -22,12 +22,10 @@ const VideoQuestionsContainer = ({setFormErrors, questions, addQuestion, targetV
   const captureTimestamp = (event) => {
     let updateField = "vid_timestamp";
     let newTime = Math.floor(targetVideo.current.currentTime)
-    debugger
     setQuestionFormData({
       ...questionFormData,
       [updateField]: newTime
     })
-    debugger
   }
 
   const validForSubmission = () => {
