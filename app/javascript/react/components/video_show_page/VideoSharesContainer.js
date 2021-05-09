@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
+import UserTile from "./UserTile"
 
-const VideoSharesContainer = ({users, shareVideo, setFormErrors}) => {
+const VideoSharesContainer = ({users, shareVideo, unshare, setFormErrors}) => {
   const [shareFormData, setShareFormData] = useState({username: ''})
 
   const usersList = users?.map(user => {
-    return <li>{user?.username}</li>
+    return <UserTile key={user.id} username={user.username} unshare={unshare}/>
   })
 
   const handleChange = (event) =>{

@@ -1,6 +1,6 @@
 class CreateVideoShares < ActiveRecord::Migration[5.2]
   def change
-    create_table :video_shares, id: false do |t|
+    create_table :video_shares do |t|
       t.belongs_to :video, null: false
       t.belongs_to :user, null: false
 

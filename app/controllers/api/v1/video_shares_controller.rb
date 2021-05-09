@@ -18,6 +18,14 @@ class Api::V1::VideoSharesController < ApplicationController
     end
   end
 
+  def destroy
+    user = User.find_by(username: params[:id])
+    video = Video.find(params[:video_id])
+    share = VideoShare.find_by(user: user, video: video)
+    VideoShare.destroy(share.id)
+    render json: { message: "share removed" }, status: :ok
+  end
+  
   private
 
   def authorize_user

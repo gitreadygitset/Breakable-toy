@@ -13,4 +13,9 @@ FactoryBot.define do
     video_url { fixture_file_upload 'spec/fixtures/IMG_1404-1.mov', 'video/mov' }
     title { 'test video' }
   end
+
+  factory :question do
+    body { 'my question' }
+    vid_timestamp { 7 }
+  end
 end

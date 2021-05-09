@@ -13,6 +13,12 @@ class Api::V1::QuestionsController < ApplicationController
     end
   end
 
+  def destroy
+    question = Question.find(params[:id])
+    question.destroy
+    render json: { message: "question removed" }, status: :ok
+  end
+
   private
   def question_params
     params.require(:question).permit(:body, :vid_timestamp)
