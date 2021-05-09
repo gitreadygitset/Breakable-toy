@@ -1,5 +1,6 @@
 class Api::V1::VideosController < ApplicationController
-  before_action :authenticate_user
+  before_action :authenticate_user!
+  before_action :authorize_user, only: [:show]
   skip_before_action :verify_authenticity_token
 
   def index
@@ -26,11 +27,13 @@ class Api::V1::VideosController < ApplicationController
       users: users
     }
   end
+
   private 
 
-  def authenticate_user
-    if !user_signed_in?
-      render json: {error: ["You need to be signed in first"]}
+  def authorize_user
+    video = Video.find(params[:id])
+    if current_user != video.uploader && current_user != video.users
+      render json: { error: 'You do not have access to this video' }, status: :forbidden
     end
   end
 end

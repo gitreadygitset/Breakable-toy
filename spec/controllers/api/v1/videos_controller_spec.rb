@@ -1,6 +1,9 @@
+require 'rails_helper'
+
 RSpec.describe Api::V1::VideosController, type: :controller do
   let!(:user1) { FactoryBot.create(:user, role: 'independent user') }
   let!(:user2) { FactoryBot.create(:user, username: 'guest2', role: 'independent user' )}
+  let!(:user3) { FactoryBot.create(:user, username: 'guest3') }
   let!(:video1) { FactoryBot.create(:video, uploader: user1) }
   let!(:video2) { FactoryBot.create(:video, uploader: user1, title: 'another test video') }
   let!(:video_share1) { VideoShare.create(user: user2, video: video1)}
@@ -18,9 +21,7 @@ RSpec.describe Api::V1::VideosController, type: :controller do
 
     it "Should redirect to the login page if the user is not signed in" do
       get :index
-      returned_json = JSON.parse(response.body)
-
-      expect(returned_json["error"][0]).to eq("You need to be signed in first")
+      expect(response.status).to eq(302)
     end
   end
 
@@ -34,6 +35,14 @@ RSpec.describe Api::V1::VideosController, type: :controller do
       expect(response.content_type).to eq("application/json")
       expect(returned_json["video"]["title"]).to eq(video1.title)
       expect(returned_json["users"].length).to eq(1)
+    end
+
+    it "Should display an error message if the user does not have access to the video" do
+      sign_in user3
+      get :show, params: {id: video1.id}
+      returned_json = JSON.parse(response.body)
+
+      expect(response.status).to eq 403
     end
   end
 
