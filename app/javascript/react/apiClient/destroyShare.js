@@ -6,9 +6,8 @@ const destroyShare = async(username, videoId) => {
         'Content-Type': 'application/json',
         Accept: 'application/json',
         credentials: 'same-origin'
-      }}
-      //body: JSON.stringify({ username: username })
-    )
+      }
+    })
     if(deleteShareResponse.ok) {
       return true;
     } else {

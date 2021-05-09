@@ -6,8 +6,7 @@ const destroyQuestion = async(questionId, videoId) => {
         'Content-Type': 'application/json',
         Accept: 'application/json',
         credentials: 'same-origin'
-      },
-      body: JSON.stringify({ id: questionId })
+      }
     })
     if(deleteQuestionResponse.ok) {
       return true;

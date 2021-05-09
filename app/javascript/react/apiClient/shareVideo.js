@@ -1,4 +1,4 @@
-const shareVideo = async(formData, videoId) => {
+const addShare = async(formData, videoId) => {
   try {
     const addShareResponse = await fetch(`/api/v1/videos/${videoId}/video_shares`, {
       method: 'POST',
@@ -19,4 +19,4 @@ const shareVideo = async(formData, videoId) => {
     console.error(`Error in fetch: ${error.message}`)
   }
 }
-export default shareVideo;
+export default addShare;

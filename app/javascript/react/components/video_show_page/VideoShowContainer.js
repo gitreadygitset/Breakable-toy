@@ -7,7 +7,7 @@ import QuestionDisplay from './QuestionDisplay'
 import useVideoPause from '../../useEffect/useVideoPause'
 import createQuestion from '../../apiClient/createQuestion'
 import destroyQuestion from '../../apiClient/destroyQuestion'
-import shareVideo from '../../apiClient/shareVideo'
+import addShare from '../../apiClient/shareVideo'
 import destroyShare from '../../apiClient/destroyShare'
 
 const VideoShowContainer = (props) => {
@@ -42,11 +42,11 @@ const VideoShowContainer = (props) => {
   }
 
   const shareVideo = async(formData) => {
-    const shareResponse = await shareVideo(formData, videoId);
+    const shareResponse = await addShare(formData, videoId);
     if(shareResponse.error){
-      setFormErrors([parsedAddShareResponse.error])
+      setFormErrors([shareResponse.error])
     } else {
-      setUsers([...users, parsedAddShareResponse]);
+      setUsers([...users, shareResponse]);
     }
   }
 
