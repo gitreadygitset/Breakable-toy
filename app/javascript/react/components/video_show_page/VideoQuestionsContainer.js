@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
+import QuestionTile from './QuestionTile'
 
-const VideoQuestionsContainer = ({setFormErrors, questions, addQuestion, targetVideo}) => {
+const VideoQuestionsContainer = ({setFormErrors, questions, addQuestion, deleteQuestion, targetVideo}) => {
   const [questionFormData, setQuestionFormData] = useState({
     body: '', 
     vid_timestamp: ''
   })
 
   const questionsList = questions?.map(question => {
-    return <li><p>{question?.body}</p>
-    {question.vid_timestamp && <span>timestamp: {question?.vid_timestamp}</span>}
-    </li>
+    return <QuestionTile key={question.id} question={question} deleteQuestion={deleteQuestion}/>
   })
 
   const handleChange = (event) => { 

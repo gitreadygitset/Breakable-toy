@@ -6,7 +6,9 @@ import ErrorList from '../ErrorList'
 import QuestionDisplay from './QuestionDisplay'
 import useVideoPause from '../../useEffect/useVideoPause'
 import createQuestion from '../../apiClient/createQuestion'
-import shareVideo from '../../apiClient/shareVideo'
+import destroyQuestion from '../../apiClient/destroyQuestion'
+import addShare from '../../apiClient/shareVideo'
+import destroyShare from '../../apiClient/destroyShare'
 
 const VideoShowContainer = (props) => {
   const videoId = props.match.params.id;
@@ -40,11 +42,18 @@ const VideoShowContainer = (props) => {
   }
 
   const shareVideo = async(formData) => {
-    const shareResponse = await shareVideo(formData, videoId);
+    const shareResponse = await addShare(formData, videoId);
     if(shareResponse.error){
-      setFormErrors([parsedAddShareResponse.error])
+      setFormErrors([shareResponse.error])
     } else {
-      setUsers([...users, parsedAddShareResponse]);
+      setUsers([...users, shareResponse]);
+    }
+  }
+
+  const unshare = async(username) => {
+    if(await destroyShare(username, videoId)){
+      let remainingUsers = users.filter(existingUser => existingUser.username !== username);
+      setUsers(remainingUsers);
     }
   }
 
@@ -57,6 +66,15 @@ const VideoShowContainer = (props) => {
     setQuestions([...questions, addQuestionResponse])    
   }
   
+  const deleteQuestion = async(questionId) => {
+    if(await destroyQuestion(questionId, videoId)){
+      let remainingQuestions = questions.filter(
+        (existingQuestion) => existingQuestion.id !== questionId
+      );
+      setQuestions(remainingQuestions);
+    }
+  }
+
   const toggleShares = (event) => {
     if(!sharesVisibility){
       setSharesVisibility(true);
@@ -119,6 +137,7 @@ const VideoShowContainer = (props) => {
             <VideoSharesContainer 
               users={users} 
               shareVideo={shareVideo}
+              unshare={unshare}
               setFormErrors={setFormErrors}
             />   
           </div>
@@ -128,6 +147,7 @@ const VideoShowContainer = (props) => {
             <VideoQuestionsContainer 
               questions={questions}
               addQuestion={addQuestion}
+              deleteQuestion={deleteQuestion}
               setFormErrors={setFormErrors}
               targetVideo={targetVideo}
             /> 

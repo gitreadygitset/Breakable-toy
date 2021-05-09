@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2021_05_06_142457) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  create_table "video_shares", id: false, force: :cascade do |t|
+  create_table "video_shares", force: :cascade do |t|
     t.bigint "video_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
