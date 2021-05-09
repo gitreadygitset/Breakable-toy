@@ -4,7 +4,6 @@ class Api::V1::VideosController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    binding.pry
     render json: current_user.uploads
   end
 
