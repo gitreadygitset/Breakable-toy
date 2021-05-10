@@ -14,9 +14,15 @@ const QuestionDisplay = ({questions}) => {
   }
 
   return(
-    <div>
-      {questions.length > 1 ? <i className="fa fa-arrow-right fa-2x" onMouseDown={handleScroll}/> : null}
-      <p>{currentQuestion.body}</p>
+    <div className="question-display">
+      <div>
+        <p>{currentQuestion.body}</p>
+      </div>
+      {questions.length > 1 ? 
+        <div>
+          <i className="fa fa-arrow-right fa-2x" onMouseDown={handleScroll}/>
+        </div> 
+      : null}
     </div>
   )
 }

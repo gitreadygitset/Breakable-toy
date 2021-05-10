@@ -1,8 +1,79 @@
-button {
-  border: 1px solid black;
-  background-color: lightGray;
-  padding: 0.5rem;
+$dark-blue: hsla(225, 50%, 20%, 1);
+$sandy: hsla(28, 82%, 75%, 1);
+$green: hsla(125, 18%, 75%, 1);
+
+.content {
+  background-color: white;
+  padding: 1rem;
+  color: $dark-blue;
 }
-h1 {
+button,
+input[type="submit"] {
+  border: 2px solid $dark-blue;
+  padding: 0.5rem;
+  background-color: $sandy;
+  color: $dark-blue;
+  font-weight: bold;
+}
+
+input[type="submit"] {
+  background-color: $green;
+}
+
+.margin {
+  margin: 0.5rem;
+}
+
+h1,
+h2,
+h3,
+.center {
   text-align: center;
+}
+
+h1 {
+  margin: 2rem;
+}
+form {
+  margin: 0 auto;
+  background-color: white;
+  .form-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 1rem;
+  }
+  .field {
+    margin: 1rem;
+  }
+  input {
+    width: 60%;
+  }
+
+  input[type="submit"],
+  input[type="checkbox"] {
+    width: auto;
+  }
+
+  label {
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: inline;
+    padding-right: 1rem;
+    color: $dark-blue;
+  }
+  .field-instructions {
+    font-size: 0.8rem;
+  }
+  .not-bold {
+    font-weight: normal;
+  }
+}
+.devise-form {
+  width: 60%;
+  margin: 0 auto;
+  padding: 2rem;
+}
+ul {
+  list-style-type: none;
 }

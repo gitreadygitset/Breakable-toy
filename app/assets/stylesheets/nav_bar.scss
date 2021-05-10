@@ -1,0 +1,25 @@
+$dark-blue: hsla(225, 50%, 20%, 1);
+$sandy: hsla(28, 82%, 75%, 1);
+
+.top-bar {
+  background-color: $dark-blue;
+  color: white;
+  ul {
+    background-color: $dark-blue;
+    margin-right: 2rem;
+  }
+  a {
+    color: white;
+  }
+  .app-title {
+    margin-left: 2rem;
+    h2 {
+      font-size: 1.5rem;
+    }
+    h1,
+    h2 {
+      padding: 0;
+      margin: 0;
+    }
+  }
+}

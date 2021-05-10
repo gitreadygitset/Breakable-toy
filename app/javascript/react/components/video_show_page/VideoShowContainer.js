@@ -9,6 +9,7 @@ import createQuestion from '../../apiClient/createQuestion'
 import destroyQuestion from '../../apiClient/destroyQuestion'
 import addShare from '../../apiClient/shareVideo'
 import destroyShare from '../../apiClient/destroyShare'
+import editQuestion from '../../apiClient/editQuestion'
 
 const VideoShowContainer = (props) => {
   const videoId = props.match.params.id;
@@ -75,13 +76,23 @@ const VideoShowContainer = (props) => {
     }
   }
 
+  const updateQuestion = async(formData) => {
+    const updateQuestionResponse = await editQuestion(formData, videoId)
+    const changeIndex = questions.findIndex(question => {return question.id === updateQuestionResponse.id});
+    const questionsCopy = questions.map(question => question);
+    questionsCopy[changeIndex] = updateQuestionResponse;
+    setQuestions(questionsCopy)
+    document.getElementById("questions-title").innerText = "Add a question or pause point to this video"
+    document.getElementById("question-submit").innerText = "Add Question"
+    }
+  
   const toggleShares = (event) => {
     if(!sharesVisibility){
       setSharesVisibility(true);
-      event.currentTarget.innerText = "Hide shared users"
+      event.currentTarget.innerText = "Hide users"
     } else {
       setSharesVisibility(false);
-      event.currentTarget.innerText = "See and add shared users"
+      event.currentTarget.innerText = "Shared users"
     }
   }
 
@@ -91,7 +102,7 @@ const VideoShowContainer = (props) => {
       event.currentTarget.innerText = "Hide questions"
     } else {
       setQuestionsVisibility(false);
-      event.currentTarget.innerText = "See and add questions"
+      event.currentTarget.innerText = "Questions and pause points"
     }
   }
   
@@ -118,15 +129,13 @@ const VideoShowContainer = (props) => {
           <span id="time-display"></span>
         </div>
         {questions.length > 0 ?
-        <div className="question-display">
-           <QuestionDisplay questions={questions}/>
-        </div>
+        <QuestionDisplay questions={questions}/>
         : null}
       </div>
       <div className="editing-container">
         <div className="show-buttons">
-          <button id="sharesToggle" onClick={toggleShares}>See and add shared users</button>
-          <button id="questionsToggle" onClick={toggleQuestions}>See and add questions</button>
+          <button id="sharesToggle" className="margin" onClick={toggleShares}>Shared users</button>
+          <button id="questionsToggle" className="margin" onClick={toggleQuestions}>Questions and pause points</button>
         </div>
         <div className="errors">
           <ErrorList errors={formErrors}/>
@@ -148,6 +157,7 @@ const VideoShowContainer = (props) => {
               questions={questions}
               addQuestion={addQuestion}
               deleteQuestion={deleteQuestion}
+              updateQuestion={updateQuestion}
               setFormErrors={setFormErrors}
               targetVideo={targetVideo}
             /> 
@@ -157,6 +167,7 @@ const VideoShowContainer = (props) => {
       </div>
       <Link to='/videos'>Back to my videos list</Link>
     </div>
-  )
-}}
+  )}
+}
+
 export default VideoShowContainer

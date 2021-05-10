@@ -51,16 +51,28 @@ const NewVideoForm = ({setVideoFormData, videoFormData, addVideo})=> {
 
   return (
     <div>
-      <h2>Upload a new video</h2>
       <ErrorList errors={formErrors}/>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Video title</label>
-        <input type="text" id="title" name="title" value={videoFormData.title} onChange={handleChange}/>
-
-        <label htmlFor="video_url">Attach your video file</label>
-        <input type="file" accept="video/*" onChange={handleFileUpload}></input>
-
-        <input type="submit" value="Upload Video"/>
+        <div className="form-title">
+          <span>Upload a new video</span>
+        </div>
+        <div className="field">
+          <label htmlFor="title">Video title</label>
+          <input 
+            type="text" 
+            id="title" 
+            name="title" 
+            value={videoFormData.title} 
+            onChange={handleChange}
+            />
+        </div>
+        <div className="field">
+          <label htmlFor="video_url">Attach your video file</label>
+          <input type="file" accept="video/*" onChange={handleFileUpload}></input>
+        </div>
+        <div className="field">
+          <input type="submit" value="Upload Video"/>
+        </div>
       </form>
     </div>
   )

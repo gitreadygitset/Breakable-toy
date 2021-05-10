@@ -19,6 +19,12 @@ class Api::V1::QuestionsController < ApplicationController
     render json: { message: "question removed" }, status: :ok
   end
 
+  def update
+    question = Question.find(params[:id])
+    question.update_attributes(question_params)
+    render json: question
+  end
+
   private
   def question_params
     params.require(:question).permit(:body, :vid_timestamp)
