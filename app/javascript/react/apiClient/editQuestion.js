@@ -1,8 +1,7 @@
-const createQuestion = async(formData, videoId) => {
+const editQuestion = async(formData, videoId) => {
   try {
-    debugger
-    const addQuestionResponse = await fetch(`/api/v1/videos/${videoId}/questions`, {
-      method: 'POST',
+    const editQuestionResponse = await fetch(`/api/v1/videos/${videoId}/questions/${formData.question_id}`, {
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -10,9 +9,9 @@ const createQuestion = async(formData, videoId) => {
       },
       body: JSON.stringify(formData)
     })
-    if(addQuestionResponse.ok) {
-      const parsedAddQuestionResponse = await addQuestionResponse.json();
-      return parsedAddQuestionResponse;
+    if(editQuestionResponse.ok) {
+      const parsedEditQuestionResponse = await editQuestionResponse.json();
+      return parsedEditQuestionResponse;
     } else {
       throw new Error(`${addQuestionResponse.status}: ${addQuestionResponse.statusText}`)
     }
@@ -20,4 +19,5 @@ const createQuestion = async(formData, videoId) => {
     console.error(`Error in fetch: ${error.message}`)
   }
 }
-export default createQuestion;
+
+export default editQuestion

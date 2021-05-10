@@ -8,8 +8,8 @@ const UserTile = ({unshare, username}) => {
 
   return (
     <li>
-      <span>{username}</span>
-      <button type="button" onClick={handleUnshareClick}>Remove user</button>
+      <button type="button" onClick={handleUnshareClick}><i className="fas fa-unlink"></i></button>
+      <p>{username}</p>  
     </li>
   )
 }

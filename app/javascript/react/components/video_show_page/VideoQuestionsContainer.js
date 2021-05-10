@@ -1,18 +1,30 @@
 import React, { useState } from 'react'
 import QuestionTile from './QuestionTile'
 
-const VideoQuestionsContainer = ({setFormErrors, questions, addQuestion, deleteQuestion, targetVideo}) => {
+const VideoQuestionsContainer = ({setFormErrors, questions, updateQuestion, addQuestion, deleteQuestion, targetVideo}) => {
   const [questionFormData, setQuestionFormData] = useState({
     body: '', 
-    vid_timestamp: ''
+    vid_timestamp: '',
+    question_id: null
   })
+
+  const refillForm = (questionId) => {
+    let question = questions.find(question => question.id === questionId)
+    setQuestionFormData({
+      body: question.body,
+      vid_timestamp: question.vid_timestamp || "",
+      question_id: questionId
+    })
+    document.getElementById("questions-title").innerText = "Edit and resubmit the selected question"
+    document.getElementById("question-submit").innerText = "Update Question"
+  }
 
   const questionsList = questions?.map(question => {
     return (
       <QuestionTile 
         key={question.id} 
         question={question} 
-        editQuestion={editQuestion}
+        refillForm={refillForm}
         deleteQuestion={deleteQuestion}
       />
     )
@@ -55,30 +67,24 @@ const VideoQuestionsContainer = ({setFormErrors, questions, addQuestion, deleteQ
   const handleSubmit = (event) => {
     event.preventDefault();
     if(validForSubmission()){
-    addQuestion(questionFormData)
+      if(questionFormData.question_id){
+        updateQuestion(questionFormData)
+      } else {
+        addQuestion(questionFormData)
+      }
     }
     setQuestionFormData({
       body: '', 
-      vid_timestamp: ''
+      vid_timestamp: '',
+      question_id: null
     })
   }
-  const editQuestion = (questionId) => {
-    debugger
-    let question = questions.find(question => question.id === questionId)
-    setQuestionFormData({
-      body: question.body,
-      vid_timestamp: question.vid_timestamp || ""
-    })
-  }
+  
   return (
     <div className="questions-open">
-      <h3>Current questions:</h3>
-      <ul className="questions-list">
-        {questionsList}
-      </ul>
       <form onSubmit={handleSubmit}>
         <div className="form-title">
-          <h3>Add a question or pause point to this video</h3>
+          <h3 id="questions-title">Add a question or pause point to this video</h3>
         </div>
         <div className="field">
           <label htmlFor="body">Question</label>
@@ -98,7 +104,7 @@ const VideoQuestionsContainer = ({setFormErrors, questions, addQuestion, deleteQ
             <div>
             <label htmlFor="timestamp-button" className="not-bold">Set the video to the point at which you want to pause, and click here: </label>
               <button type="button" onClick={captureTimestamp} id="timestamp-button">
-                Capture Timestamp
+                <i className="fas fa-camera"></i>
               </button>
               </div>
               <div>
@@ -108,7 +114,7 @@ const VideoQuestionsContainer = ({setFormErrors, questions, addQuestion, deleteQ
               <input 
                 type="number" 
                 min="1" 
-                max={targetVideo.current.duration}
+                max={targetVideo.current?.duration}
                 name="vid_timestamp" 
                 id="timestamp-enter"
                 value={questionFormData.vid_timestamp} 
@@ -118,9 +124,13 @@ const VideoQuestionsContainer = ({setFormErrors, questions, addQuestion, deleteQ
           </div>
         </div>
         <div className="field">
-          <button type="submit">Add this question</button>
+          <input type="submit" id="question-submit" value="Add question"/>
         </div>
         </form>
+        <h3>Current questions:</h3>
+      <ul className="tile-list">
+        {questionsList}
+      </ul>
     </div>
   )
 }

@@ -37,12 +37,7 @@ const VideoSharesContainer = ({users, shareVideo, unshare, setFormErrors}) => {
   
   return (
     <div className="shared-open">
-      <h3>Shared with:</h3>
-      <ul>
-        {usersList}
-      </ul>
       <div>
-        
         <form onSubmit={handleShare}>
           <div className="form-title">
             <h3>Share this video with another user</h3>
@@ -58,9 +53,13 @@ const VideoSharesContainer = ({users, shareVideo, unshare, setFormErrors}) => {
               />
           </div>
           <div className="field">
-            <button type="submit" >Share this video</button>
+            <input type="submit" value="Share Video"/>
           </div>
         </form>
+        <h3>Shared with:</h3>
+        <ul className="tile-list">
+          {usersList}
+        </ul>
       </div>
     </div>
   )
