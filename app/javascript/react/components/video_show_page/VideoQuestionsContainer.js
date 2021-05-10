@@ -16,7 +16,6 @@ const VideoQuestionsContainer = ({setFormErrors, questions, updateQuestion, addQ
       question_id: questionId
     })
     document.getElementById("questions-title").innerText = "Edit and resubmit the selected question"
-    document.getElementById("question-submit").innerText = "Update Question"
   }
 
   const questionsList = questions?.map(question => {
@@ -37,7 +36,7 @@ const VideoQuestionsContainer = ({setFormErrors, questions, updateQuestion, addQ
     })
   }
 
-  const captureTimestamp = (event) => {
+  const captureTimestamp = () => {
     let updateField = "vid_timestamp";
     let newTime = Math.floor(targetVideo.current.currentTime)
     setQuestionFormData({

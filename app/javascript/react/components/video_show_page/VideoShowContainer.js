@@ -22,6 +22,7 @@ const VideoShowContainer = (props) => {
   const [sharesVisibility, setSharesVisibility] = useState(false);
   const [questionsVisibility, setQuestionsVisibility] = useState(false);
   const targetVideo = useRef(null);
+  const questionDisplay = useRef(null)
 
   const fetchVideo = async() => {
     try {
@@ -83,7 +84,7 @@ const VideoShowContainer = (props) => {
     questionsCopy[changeIndex] = updateQuestionResponse;
     setQuestions(questionsCopy)
     document.getElementById("questions-title").innerText = "Add a question or pause point to this video"
-    document.getElementById("question-submit").innerText = "Add Question"
+    document.getElementById("question-submit").value = "Add Question"
     }
   
   const toggleShares = (event) => {
@@ -107,12 +108,12 @@ const VideoShowContainer = (props) => {
   }
   
   const timesArray = () => {
-    let timesArray = questions?.filter(question => question.vid_timestamp).map(question => question.vid_timestamp)
-    return timesArray.sort((a,b) => a-b)
-  }
-  
-  useVideoPause(targetVideo, timesArray())
+    let timesArray = questions?.filter(question => question.vid_timestamp).map(question => question)
+    return timesArray.sort((a,b) => a.vid_timestamp-b.vid_timestamp)
+  } 
 
+  useVideoPause(targetVideo, timesArray(), questionDisplay)
+  
   if(forbidden){
     return (
       <div>
@@ -120,54 +121,57 @@ const VideoShowContainer = (props) => {
       </div>
     )
   } else {
-  return (
-    <div>
-      <h1>{video.title}</h1>
-      <div className="video-show-container">
-        <div className="video-container">
-          <video src={video.video_url?.url} controls preload="metadata" id="video" ref={targetVideo}/>
-          <span id="time-display"></span>
-        </div>
-        {questions.length > 0 ?
-        <QuestionDisplay questions={questions}/>
-        : null}
-      </div>
-      <div className="editing-container">
-        <div className="show-buttons">
-          <button id="sharesToggle" className="margin" onClick={toggleShares}>Shared users</button>
-          <button id="questionsToggle" className="margin" onClick={toggleQuestions}>Questions and pause points</button>
-        </div>
-        <div className="errors">
-          <ErrorList errors={formErrors}/>
-        </div>
-        <div className="forms">
-        {sharesVisibility ?
-          <div className="shared-users">  
-            <VideoSharesContainer 
-              users={users} 
-              shareVideo={shareVideo}
-              unshare={unshare}
-              setFormErrors={setFormErrors}
-            />   
+    return (
+      <div>
+        <h1>{video.title}</h1>
+        <div className="video-show-container">
+          <div className="video-container">
+            <video src={video.video_url?.url} controls preload="metadata" id="video" ref={targetVideo}/>
+            <span id="time-display"></span>
           </div>
-          : null}
-          {questionsVisibility ?
-          <div className="questions">
-            <VideoQuestionsContainer 
-              questions={questions}
-              addQuestion={addQuestion}
-              deleteQuestion={deleteQuestion}
-              updateQuestion={updateQuestion}
-              setFormErrors={setFormErrors}
-              targetVideo={targetVideo}
-            /> 
+          <div className = "question-display" ref={questionDisplay}>
+            {questions.length > 0 ?
+            <QuestionDisplay questions={questions} timesArray={timesArray} />
+            : null}
           </div>
-          : null}  
         </div>
+        <div className="editing-container">
+          <div className="show-buttons">
+            <button id="sharesToggle" className="margin" onClick={toggleShares}>Shared users</button>
+            <button id="questionsToggle" className="margin" onClick={toggleQuestions}>Questions and pause points</button>
+          </div>
+          <div className="errors">
+            <ErrorList errors={formErrors}/>
+          </div>
+          <div className="forms">
+          {sharesVisibility ?
+            <div className="shared-users">  
+              <VideoSharesContainer 
+                users={users} 
+                shareVideo={shareVideo}
+                unshare={unshare}
+                setFormErrors={setFormErrors}
+              />   
+            </div>
+            : null}
+            {questionsVisibility ?
+            <div className="questions">
+              <VideoQuestionsContainer 
+                questions={questions}
+                addQuestion={addQuestion}
+                deleteQuestion={deleteQuestion}
+                updateQuestion={updateQuestion}
+                setFormErrors={setFormErrors}
+                targetVideo={targetVideo}
+              /> 
+            </div>
+            : null}  
+          </div>
+        </div>
+        <Link to='/videos'>Back to my videos list</Link>
       </div>
-      <Link to='/videos'>Back to my videos list</Link>
-    </div>
-  )}
+    )
+  }
 }
 
 export default VideoShowContainer
