@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment,  } from 'react'
 
-const QuestionDisplay = ({questions}) => {
+const QuestionDisplay = ({questions, timesArray}) => {
   const [currentQuestion, setCurrentQuestion] = useState(questions[0])
   
   const handleScroll = () => {
@@ -12,18 +12,23 @@ const QuestionDisplay = ({questions}) => {
     }
     return setCurrentQuestion(questions[questionIndex]);
   }
-
-  return(
-    <div className="question-display">
-      <div>
-        <p>{currentQuestion.body}</p>
-      </div>
-      {questions.length > 1 ? 
+  
+  const noPauses = timesArray().length === 0;
+  if(noPauses) {
+    return(
+      <Fragment>
         <div>
-          <i className="fa fa-arrow-right fa-2x" onMouseDown={handleScroll}/>
-        </div> 
-      : null}
-    </div>
-  )
+          <p>{currentQuestion.body}</p>
+        </div>
+        {questions.length > 1 ? 
+          <div>
+            <i className="fa fa-arrow-right fa-2x" onMouseDown={handleScroll}/>
+          </div> 
+        : null}
+      </Fragment>
+    )
+  } else {
+    return null;
+  }
 }
 export default QuestionDisplay

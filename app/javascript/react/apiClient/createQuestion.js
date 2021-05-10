@@ -1,6 +1,5 @@
 const createQuestion = async(formData, videoId) => {
   try {
-    debugger
     const addQuestionResponse = await fetch(`/api/v1/videos/${videoId}/questions`, {
       method: 'POST',
       headers: {
