@@ -4,7 +4,7 @@ const ErrorList = ({errors}) => {
   if (errors.length > 0) {
     const listItems = errors.map(error => {
       return (
-        <li>{error}</li>
+        <li className="error">{error}</li>
       );
     });
     return (

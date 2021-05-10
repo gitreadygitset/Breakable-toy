@@ -42,17 +42,24 @@ const VideoSharesContainer = ({users, shareVideo, unshare, setFormErrors}) => {
         {usersList}
       </ul>
       <div>
-        <h3>Share this video with another user</h3>
+        
         <form onSubmit={handleShare}>
-          <label htmlFor="username">Enter the username of the person you'd like to share with</label>
-          <input 
-            type="text" 
-            id="username" 
-            name="username"
-            onChange={handleChange} 
-            value={shareFormData.username}
-            />
-          <button type="submit" >Share this video</button>
+          <div className="form-title">
+            <h3>Share this video with another user</h3>
+          </div>
+          <div className="field">
+            <label htmlFor="username">Username of the person you'd like to share with:</label>
+            <input 
+              type="text" 
+              id="username" 
+              name="username"
+              onChange={handleChange} 
+              value={shareFormData.username}
+              />
+          </div>
+          <div className="field">
+            <button type="submit" >Share this video</button>
+          </div>
         </form>
       </div>
     </div>

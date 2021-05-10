@@ -118,15 +118,13 @@ const VideoShowContainer = (props) => {
           <span id="time-display"></span>
         </div>
         {questions.length > 0 ?
-        <div className="question-display">
-           <QuestionDisplay questions={questions}/>
-        </div>
+        <QuestionDisplay questions={questions}/>
         : null}
       </div>
       <div className="editing-container">
         <div className="show-buttons">
-          <button id="sharesToggle" onClick={toggleShares}>See and add shared users</button>
-          <button id="questionsToggle" onClick={toggleQuestions}>See and add questions</button>
+          <button id="sharesToggle" className="margin" onClick={toggleShares}>Shared users</button>
+          <button id="questionsToggle" className="margin" onClick={toggleQuestions}>Questions and pause points</button>
         </div>
         <div className="errors">
           <ErrorList errors={formErrors}/>
