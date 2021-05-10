@@ -6,7 +6,6 @@ const useVideoPause = (targetVideo, timesArray, questionDisplay) => {
     if(timesArray.length > 0) {
       
       targetVideo.current.addEventListener('play', (event) => {
-        console.log("triggered")
         questionDisplay.current.innerHTML = ""
       })
       
