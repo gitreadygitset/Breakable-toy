@@ -4,7 +4,20 @@ class Api::V1::VideosController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    render json: current_user.uploads
+    if current_user.role == 'supported user' 
+      videos = current_user.videos.map do |video|
+        ActiveModelSerializers::SerializableResource.new(video, {serializer: VideoSerializer})
+      end
+    else
+      all_videos = current_user.uploads + current_user.videos
+      videos = all_videos.map do |video|
+        ActiveModelSerializers::SerializableResource.new(video, {serializer: VideoSerializer})
+      end
+    end
+    render json: {
+      videos: videos,
+      role: current_user.role
+    }
   end
 
   def create
@@ -24,7 +37,8 @@ class Api::V1::VideosController < ApplicationController
     render json: {
       video: VideoSerializer.new(video),
       questions: questions,
-      users: users
+      users: users,
+      current_user: current_user
     }
   end
 
@@ -32,7 +46,7 @@ class Api::V1::VideosController < ApplicationController
 
   def authorize_user
     video = Video.find(params[:id])
-    if current_user != video.uploader && current_user != video.users
+    if current_user != video.uploader && !video.users.include?(current_user)
       render json: { error: 'You do not have access to this video' }, status: :forbidden
     end
   end

@@ -18,6 +18,7 @@ const VideoShowContainer = (props) => {
   const [video, setVideo] = useState({});
   const [users, setUsers] = useState([]);
   const [questions, setQuestions] = useState([]);
+  const [userRole, setUserRole] = useState(null)
   const [formErrors, setFormErrors] = useState([]);
   const [sharesVisibility, setSharesVisibility] = useState(false);
   const [questionsVisibility, setQuestionsVisibility] = useState(false);
@@ -32,6 +33,7 @@ const VideoShowContainer = (props) => {
         setVideo(videoResponse.video);
         setUsers(videoResponse.users);
         setQuestions(videoResponse.questions);
+        setUserRole(videoResponse.current_user.role);
       } else {
         if(videoResponse.status === 403){
           setForbidden(true);
@@ -135,6 +137,7 @@ const VideoShowContainer = (props) => {
             : null}
           </div>
         </div>
+        {userRole === "supported user" ? null :
         <div className="editing-container">
           <div className="show-buttons">
             <button id="sharesToggle" className="margin" onClick={toggleShares}>Shared users</button>
@@ -168,6 +171,7 @@ const VideoShowContainer = (props) => {
             : null}  
           </div>
         </div>
+        }
         <Link to='/videos'>Back to my videos list</Link>
       </div>
     )
