@@ -4,17 +4,19 @@ import NewVideoForm from './NewVideoForm'
 
 const VideosIndexContainer = (props) => {
   const [videos, setVideos] = useState([])
+  const [userRole, setUserRole] = useState(null);
   const [videoFormData, setVideoFormData] = useState({
     title: "",
     video_url: ""
   })
-
+ 
   const fetchVideos = async() => {
     try {
       let videosResponse = await fetch('/api/v1/videos')
       if(videosResponse.ok){
         videosResponse = await videosResponse.json()
-        setVideos(videosResponse.videos)
+        setVideos(videosResponse.videos);
+        setUserRole(videosResponse.role)
       } else {
         throw new Error(`${videosResponse.status}: ${videosResponse.statusText}`)
       }
@@ -41,7 +43,7 @@ const VideosIndexContainer = (props) => {
       })
       if(addVideoResponse.ok) {
         const parsedAddVideoResponse = await addVideoResponse.json();
-        setVideos([...videos, parsedAddVideoResponse.video]);
+        setVideos([...videos, parsedAddVideoResponse]);
       } else {
         throw new Error(`${addVideoResponse.status}: ${addVideoResponse.statusText}`)
       }
@@ -50,7 +52,7 @@ const VideosIndexContainer = (props) => {
     }
   }
   const videoComponents = videos.map(video => {
-    return <VideoTile key={video.id} video={video}/>
+    return <VideoTile key={video.video.id} video={video.video}/>
   })
  
   return (
@@ -60,12 +62,14 @@ const VideosIndexContainer = (props) => {
           <div className="video-grid">
             {videoComponents}
           </div> 
+        {userRole === "supported user" ? null :  
         <div className="video-form">
           <NewVideoForm 
           setVideoFormData={setVideoFormData} 
           videoFormData={videoFormData} 
           addVideo={addVideo}/>
         </div>
+        }
       </div>
     </div>
   )
