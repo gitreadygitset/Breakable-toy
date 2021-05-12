@@ -49,7 +49,7 @@ class Api::V1::VideosController < ApplicationController
   def destroy
     video = Video.find(params[:id])
     video.destroy
-    render json: { message: "share removed" }, status: :ok
+    render json: { message: "video removed" }, status: :ok
   end
 
   private 
