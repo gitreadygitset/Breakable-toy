@@ -68,7 +68,7 @@ const NewVideoForm = ({setVideoFormData, videoFormData, addVideo})=> {
     addVideo();
     setVideoFormData({
       title: '',
-      video_url: '',
+      video_url: ''
       })
     }
   };
@@ -96,13 +96,13 @@ const NewVideoForm = ({setVideoFormData, videoFormData, addVideo})=> {
         </div>
         <div id="preview-thumbnail">
           <div>
-          <p>After you attach your file, pause the preview below to set a distinctive thumbnail for this video.</p>
-          <video id="preview-vid" width="230px" controls>
-          </video>
+            <p>After you attach your file, pause the preview below to set a distinctive thumbnail for this video.</p>
+            <video id="preview-vid" width="230px" controls>
+            </video>
           </div>
           <div>
-          <canvas id="canvas" width="230px"></canvas>
-          <img id="thumbnail"/>
+            <canvas id="canvas" width="230px"></canvas>
+            <img id="thumbnail"/>
           </div>
         </div>
         <div className="field">
