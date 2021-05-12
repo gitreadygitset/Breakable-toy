@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import VideoTile from './VideoTile'
 import NewVideoForm from './NewVideoForm'
+import destroyVideo from '../../apiClient/destroyVideo'
 
 const VideosIndexContainer = (props) => {
   const [videoCount, setVideoCount] = useState(0)
@@ -55,9 +56,24 @@ const VideosIndexContainer = (props) => {
       console.error(`Error in fetch: ${error.message}`)
     }
   }
+
+  const deleteVideo = async(videoId) => {
+    if(await destroyVideo(videoId)){
+      const remainingVideos = videos.filter(
+        existingVideo => existingVideo.video.id !== videoId);
+      
+      setVideos(remainingVideos);
+    }
+  }
   
   const videoComponents = videos.map(video => {
-    return <VideoTile key={video.video.id} video={video.video}/>
+    return (
+      <VideoTile 
+      key={video.video.id} 
+      video={video.video} 
+      deleteVideo={deleteVideo}
+      />
+    )
   })
 
   const fillGrid = () => {

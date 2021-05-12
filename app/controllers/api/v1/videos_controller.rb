@@ -30,16 +30,26 @@ class Api::V1::VideosController < ApplicationController
   end
 
   def show
-    video = Video.find(params[:id])
-    questions = video.questions
-    users = video.users
+     if Video.find(params[:id])
+      video = Video.find(params[:id])
+      questions = video.questions
+      users = video.users
 
-    render json: {
-      video: VideoSerializer.new(video),
-      questions: questions,
-      users: users,
-      current_user: current_user
-    }
+      render json: {
+        video: VideoSerializer.new(video),
+        questions: questions,
+        users: users,
+        current_user: current_user
+      }
+    else 
+      status 404
+    end
+  end
+
+  def destroy
+    video = Video.find(params[:id])
+    video.destroy
+    render json: { message: "video removed" }, status: :ok
   end
 
   private 
