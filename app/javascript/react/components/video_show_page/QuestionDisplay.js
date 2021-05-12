@@ -18,6 +18,9 @@ const QuestionDisplay = ({questions, timesArray}) => {
     return(
       <Fragment>
         <div>
+        <i class="fas fa-volume-up fa-2x"></i>
+        </div>
+        <div>
           <p>{currentQuestion.body}</p>
         </div>
         {questions.length > 1 ? 

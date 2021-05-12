@@ -72,6 +72,7 @@ const VideosIndexContainer = (props) => {
       key={video.video.id} 
       video={video.video} 
       deleteVideo={deleteVideo}
+      userRole={userRole}
       />
     )
   })

@@ -12,7 +12,7 @@ const QuestionTile = ({question, refillForm, deleteQuestion}) => {
       <button type="button" onClick={handleEditClick}><i className="far fa-edit"></i></button>
       <button type="button" onClick={handleDeleteClick}><i className="far fa-trash-alt"></i></button>
       <p>{question?.body}</p>
-      {question.vid_timestamp && <span>timestamp: {question?.vid_timestamp}</span>}
+      {question.vid_timestamp && <span>  Timestamp: {question?.vid_timestamp}</span>}
     </li>
   )
 }
