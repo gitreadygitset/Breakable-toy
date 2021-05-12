@@ -8,6 +8,7 @@ const VideoTile = ({video, deleteVideo}) => {
     confirm('Are you sure you want to delete this video?')
     deleteVideo(video.id)
   }
+
   return (
     <div className="video-tile">
       <Link to={`/videos/${video.id}`}>
@@ -16,9 +17,9 @@ const VideoTile = ({video, deleteVideo}) => {
           src={video.thumbnail.url}
           />
         </div>
-        <h3>{video.title}</h3>
+        <h3>{video.title}</h3></Link>
         <button type="button" onClick={handleDeleteClick}><i className="far fa-trash-alt"></i></button>
-      </Link>
+      
     </div>
   )
 }
