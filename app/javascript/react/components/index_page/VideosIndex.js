@@ -47,8 +47,6 @@ const VideosIndexContainer = (props) => {
       })
       if(addVideoResponse.ok) {
         const parsedAddVideoResponse = await addVideoResponse.json();
-        parsedAddVideoResponse.thumbnail = parsedAddVideoResponse.thumbnail.createObjectURL(blob);
-        debugger  
         setVideos([...videos, parsedAddVideoResponse]);
       } else {
         throw new Error(`${addVideoResponse.status}: ${addVideoResponse.statusText}`)

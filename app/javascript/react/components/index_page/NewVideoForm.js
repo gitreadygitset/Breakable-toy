@@ -95,10 +95,15 @@ const NewVideoForm = ({setVideoFormData, videoFormData, addVideo})=> {
           <input type="file" accept="video/*" onChange={handleFileUpload}></input>
         </div>
         <div id="preview-thumbnail">
+          <div>
+          <p>After you attach your file, pause the preview below to set a distinctive thumbnail for this video.</p>
           <video id="preview-vid" width="230px" controls>
           </video>
+          </div>
+          <div>
           <canvas id="canvas" width="230px"></canvas>
           <img id="thumbnail"/>
+          </div>
         </div>
         <div className="field">
           <input type="submit" value="Upload Video"/>

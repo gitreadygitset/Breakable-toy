@@ -12,5 +12,8 @@ class ThumbnailUploader < CarrierWave::Uploader::Base
       "spec/test_thumbnails/#{model.id}"
     end
   end
-
+  
+  def default_url()
+    "https://daily-buzz-profile-pics-development.s3.amazonaws.com/coffee-791045_1280.jpg"
+  end
 end
