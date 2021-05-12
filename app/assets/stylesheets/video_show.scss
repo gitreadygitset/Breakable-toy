@@ -2,30 +2,24 @@ $sandy: hsla(28, 82%, 75%, 1);
 
 .video-show-container {
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  margin-bottom: 15px;
 
-  .video-container {
-    width: 65%;
-    min-width: 430px;
-    video {
-      display: block;
-      max-width: 100%;
-      height: auto;
-      margin: 0 auto;
-    }
+  video {
+    border: 3px solid $sandy;
+    display: block;
+    max-width: 60%;
+    max-height: 500px;
+    margin: 0 auto;
   }
+
   .question-display {
-    height: stretch;
-    max-width: 40%;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-end;
-    padding-left: 1.5rem;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     font-size: 1.5rem;
+    p {
+      padding: 1.5rem 5rem;
+    }
   }
 }
 .show-buttons {
@@ -42,20 +36,16 @@ $sandy: hsla(28, 82%, 75%, 1);
   .shared-users,
   .questions {
     flex-basis: 100%;
-    padding: 2rem;
   }
 }
 .tile-list {
   li {
-    margin: 0.5rem;
     p {
       display: inline;
     }
     button {
-      margin: 0.5rem;
+      margin-right: 1rem;
+      margin-bottom: 1rem;
     }
-  }
-  li p {
-    display: inline;
   }
 }

@@ -6,6 +6,7 @@ class Video < ApplicationRecord
   belongs_to :uploader, class_name: 'User'
 
   mount_uploader :video_url, VideoUploader
+  mount_uploader :thumbnail, ThumbnailUploader
 
   validates :video_url, :title, presence: true
 end
