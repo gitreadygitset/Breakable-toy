@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 
-const VideoTile = ({video, deleteVideo}) => {
+const VideoTile = ({video, deleteVideo, userRole}) => {
 
   const handleDeleteClick = () => {
     confirm('Are you sure you want to delete this video?')
@@ -18,8 +18,9 @@ const VideoTile = ({video, deleteVideo}) => {
           />
         </div>
         <h3>{video.title}</h3></Link>
-        <button type="button" onClick={handleDeleteClick}><i className="far fa-trash-alt"></i></button>
-      
+        {userRole === "independent user" ? 
+          <button type="button" onClick={handleDeleteClick}><i className="far fa-trash-alt"></i></button>
+        : null }
     </div>
   )
 }
