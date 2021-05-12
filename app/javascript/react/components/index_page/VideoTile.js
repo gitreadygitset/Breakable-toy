@@ -7,7 +7,8 @@ const VideoTile = ({video}) => {
       <Link to={`/videos/${video.id}`}>
         <div className="grid-image-container">
           <img 
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/VHS-Video-Tape-Top-Flat.jpg/1920px-VHS-Video-Tape-Top-Flat.jpg"
+          src={video.thumbnail}
+          // "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/VHS-Video-Tape-Top-Flat.jpg/1920px-VHS-Video-Tape-Top-Flat.jpg"
           />
         </div>
         <h3>{video.title}</h3>

@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import ErrorList from '../ErrorList'
 
 const NewVideoForm = ({setVideoFormData, videoFormData, addVideo})=> {
-  const [formErrors, setFormErrors] = useState([])
-
+  const [formErrors, setFormErrors] = useState([]);
+  
   const handleChange = (event) => {
     setVideoFormData({
       ...videoFormData,
@@ -13,12 +13,36 @@ const NewVideoForm = ({setVideoFormData, videoFormData, addVideo})=> {
 
   const handleFileUpload = (event) => {
     const videoFile = event.currentTarget.files[0]
-    setVideoFormData({
-      ...videoFormData,
-      video_url: videoFile
-    })
-  }
+    
+    const reader = new FileReader();
+    reader.readAsDataURL(videoFile);
 
+    reader.onload = () => {
+      const url = URL.createObjectURL(videoFile)
+      const previewVid = document.getElementById("preview-vid")
+      const canvas = document.getElementById("canvas")
+      const frame = document.getElementById("thumbnail")
+
+      previewVid.setAttribute("src", url)
+      previewVid.addEventListener('pause', () => {
+        draw(previewVid, canvas, frame) 
+      })
+    }  
+    function draw(video, canvas, image){
+      const context = canvas.getContext('2d')
+      context.drawImage(video, 0, 0, video.width, video.clientHeight);
+      canvas.toBlob(function(thumbnailImage){
+        let imgUrl = URL.createObjectURL(thumbnailImage);
+        image.setAttribute('src', imgUrl)
+        setVideoFormData({
+          ...videoFormData,
+          thumbnail: thumbnailImage,
+          video_url: videoFile
+        })
+      })
+    }
+  }
+ 
   const validForSubmission = () => {
     let submitErrors = [];
       if (videoFormData["title"].trim() === "") {
@@ -44,7 +68,7 @@ const NewVideoForm = ({setVideoFormData, videoFormData, addVideo})=> {
     addVideo();
     setVideoFormData({
       title: '',
-      video_url: ''
+      video_url: '',
       })
     }
   };
@@ -70,9 +94,16 @@ const NewVideoForm = ({setVideoFormData, videoFormData, addVideo})=> {
           <label htmlFor="video_url">Attach your video file</label>
           <input type="file" accept="video/*" onChange={handleFileUpload}></input>
         </div>
+        <div id="preview-thumbnail">
+          <video id="preview-vid" width="230px" controls>
+          </video>
+          <canvas id="canvas" width="230px"></canvas>
+          <img id="thumbnail"/>
+        </div>
         <div className="field">
           <input type="submit" value="Upload Video"/>
         </div>
+        
       </form>
     </div>
   )
