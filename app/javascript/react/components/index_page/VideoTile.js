@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom'
 const VideoTile = ({video, deleteVideo, userRole}) => {
 
   const handleDeleteClick = () => {
-    confirm('Are you sure you want to delete this video?')
-    deleteVideo(video.id)
+    if(window.confirm('Are you sure you want to delete this video?')){
+      deleteVideo(video.id)
+    }
   }
 
   return (

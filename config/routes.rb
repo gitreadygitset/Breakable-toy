@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root "homes#authenticated"
   get "/videos", to: "homes#authenticated"
   get "/videos/:id", to: "homes#authenticated"
-  
+
   devise_for :users
    
   namespace :api do
@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         resources :questions, only: [:create, :destroy, :update]
         resources :video_shares, only: [:create, :destroy]
       end
+      get "/questions/speak/:id", to: "questions#speak"
     end
   end
 end

@@ -128,7 +128,6 @@ const VideoShowContainer = (props) => {
         <h1>{video.title}</h1>
         <div className="video-show-container">
             <video src={video.video_url?.url} controls preload="metadata" id="video" ref={targetVideo}/>
-            <span id="time-display"></span>
           <div className = "question-display" ref={questionDisplay}>
             {questions.length > 0 ?
             <QuestionDisplay questions={questions} timesArray={timesArray} />

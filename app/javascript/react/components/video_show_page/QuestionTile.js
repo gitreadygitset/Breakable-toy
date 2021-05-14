@@ -1,8 +1,10 @@
 import React from 'react'
 const QuestionTile = ({question, refillForm, deleteQuestion}) => {
+
   const handleDeleteClick = () => {
-    confirm("Delete this question?")
-    deleteQuestion(question.id)
+    if(window.confirm("Are you sure you want to delete this question?")){
+      deleteQuestion(question.id)
+    }
   }
   const handleEditClick = () => {
     refillForm(question.id)
