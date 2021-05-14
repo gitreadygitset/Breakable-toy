@@ -68,8 +68,11 @@ const NewVideoForm = ({setVideoFormData, videoFormData, addVideo})=> {
     addVideo();
     setVideoFormData({
       title: '',
-      video_url: ''
+      video_url: '',
+      thumbnail: ''
       })
+      document.getElementById('thumbnail').src = ""
+      document.getElementById('preview-vid').src = ""
     }
   };
 
