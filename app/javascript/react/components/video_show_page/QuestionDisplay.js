@@ -44,7 +44,7 @@ const QuestionDisplay = ({questions, timesArray}) => {
           <div>
             <i className="fa fa-arrow-right fa-2x" onMouseDown={handleScroll}/>
           </div> 
-        : null}
+        : ""}
       </Fragment>
     )
   } else {
