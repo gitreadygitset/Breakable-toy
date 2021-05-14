@@ -3,7 +3,6 @@ const QuestionTile = ({question, refillForm, deleteQuestion}) => {
 
   const handleDeleteClick = () => {
     if(window.confirm("Are you sure you want to delete this question?")){
-      debugger
       deleteQuestion(question.id)
     }
   }
