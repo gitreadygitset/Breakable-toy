@@ -3,7 +3,6 @@ import UserTile from "./UserTile"
 
 const VideoSharesContainer = ({users, shareVideo, unshare, setFormErrors}) => {
   const [shareFormData, setShareFormData] = useState({username: ''})
-
   const usersList = users?.map(user => {
     return <UserTile key={user.id} username={user.username} unshare={unshare}/>
   })
@@ -56,10 +55,14 @@ const VideoSharesContainer = ({users, shareVideo, unshare, setFormErrors}) => {
             <input type="submit" value="Share Video"/>
           </div>
         </form>
-        <h3>Shared with:</h3>
-        <ul className="tile-list">
-          {usersList}
-        </ul>
+        {users?.length > 0 ? 
+        <div className="shared-users">  
+          <h3>Shared with:</h3> 
+          <ul className="tile-list">
+            {usersList}
+          </ul>
+        </div>
+        : "" }
       </div>
     </div>
   )

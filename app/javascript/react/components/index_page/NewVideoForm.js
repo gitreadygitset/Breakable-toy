@@ -27,7 +27,6 @@ const NewVideoForm = ({setVideoFormData, videoFormData, addVideo})=> {
       canvas.toBlob(function(thumbnailImage){
         let imgUrl = URL.createObjectURL(thumbnailImage);
         image.setAttribute('src', imgUrl)
-        debugger
         setVideoFormData({
           title: document.getElementById('new-title').value,
           thumbnail: thumbnailImage,

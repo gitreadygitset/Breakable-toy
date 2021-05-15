@@ -1,8 +1,10 @@
 $sandy: hsla(28, 82%, 75%, 1);
+$dark-blue: hsla(225, 50%, 20%, 1);
+$medium-blue: hsla(225, 50%, 40%, 1);
 
 .video-show-container {
   width: 100%;
-
+  margin-bottom: 2rem;
   video {
     border: 3px solid $sandy;
     display: block;
@@ -24,7 +26,7 @@ $sandy: hsla(28, 82%, 75%, 1);
 }
 .show-buttons {
   display: flex;
-  justify-content: start;
+  justify-content: center;
 }
 
 .errors {
@@ -33,19 +35,29 @@ $sandy: hsla(28, 82%, 75%, 1);
 .forms {
   display: flex;
   justify-content: center;
-  .shared-users,
-  .questions {
-    flex-basis: 100%;
+  .shared-open,
+  .questions-open {
+    flex-basis: 90%;
+    border: 3px solid $dark-blue;
+    border-radius: 10px;
+    margin: 2rem;
   }
 }
 .tile-list {
+  width: auto;
+  margin-left: 1rem;
   li {
+    margin-bottom: 1rem;
     p {
       display: inline;
     }
     button {
       margin-right: 1rem;
-      margin-bottom: 1rem;
+      border-radius: 5px;
     }
   }
+}
+
+a.home-link:hover {
+  border: 1px solid $medium-blue;
 }

@@ -54,3 +54,9 @@ $sandy: hsla(28, 82%, 75%, 1);
     display: none;
   }
 }
+.video-link,
+.video-link:hover {
+  text-decoration: none;
+  color: $medium-blue;
+  padding: 0.5rem;
+}
