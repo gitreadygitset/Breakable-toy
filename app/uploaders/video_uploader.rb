@@ -11,6 +11,7 @@ class VideoUploader < CarrierWave::Uploader::Base
       "uploads/video/video_url/#{model.id}"
     elsif Rails.env.test?
       "spec/test_videos/#{model.id}"
+    end
   end
 
   def extension_allowlist
