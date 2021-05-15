@@ -6,7 +6,7 @@ class ThumbnailUploader < CarrierWave::Uploader::Base
   end
 
   def store_dir
-    if Rails.env.development?
+    if Rails.env.development? || Rails.env.production?
       "uploads/video/thumbnail/#{model.id}"
     elsif Rails.env.test?
       "spec/test_thumbnails/#{model.id}"
