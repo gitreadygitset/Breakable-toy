@@ -125,11 +125,15 @@ const VideoQuestionsContainer = ({setFormErrors, questions, updateQuestion, addQ
         <div className="field">
           <input type="submit" id="question-submit" value="Add question"/>
         </div>
-        </form>
+      </form>
+      {questions.length > 0 ? 
+      <div className="questions">
         <h3>Current questions:</h3>
-      <ul className="tile-list">
-        {questionsList}
-      </ul>
+        <ul className="tile-list">
+          {questionsList}
+        </ul>
+      </div>
+        : ""}
     </div>
   )
 }

@@ -10,6 +10,7 @@ $sandy: hsla(28, 82%, 75%, 1);
   }
   a {
     color: white;
+    padding: 0;
   }
   .top-bar-left {
     display: flex;
@@ -20,14 +21,16 @@ $sandy: hsla(28, 82%, 75%, 1);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin-left: 5px;
 
-    h2 {
-      font-size: 1.5rem;
-    }
     h1,
     h2 {
       padding: 0;
       margin: 0;
+    }
+    h2 {
+      font-size: 1.5rem;
+      margin-top: -12px;
     }
   }
   .logo-container {

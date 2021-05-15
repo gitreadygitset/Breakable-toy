@@ -1,21 +1,29 @@
 $dark-blue: hsla(225, 50%, 20%, 1);
 $sandy: hsla(28, 82%, 75%, 1);
 $green: hsla(125, 18%, 75%, 1);
-
+$medium-blue: hsla(225, 50%, 40%, 1);
+body {
+  font: "Helvetica Neue", Helvetica, sans-serif;
+}
 .content {
   background-color: white;
   padding: 1rem;
   color: $dark-blue;
 }
 button,
-input[type="submit"] {
-  border: 2px solid $dark-blue;
+[type="button"],
+[type="submit"] {
+  border-radius: 5px;
+  border: 2px solid white;
   padding: 0.5rem;
   background-color: $sandy;
   color: $dark-blue;
   font-weight: bold;
 }
-
+button:hover,
+input[type="submit"]:hover {
+  border: 2px solid $dark-blue;
+}
 input[type="submit"] {
   background-color: $green;
 }
@@ -36,7 +44,7 @@ h1 {
 }
 form {
   padding: 1rem;
-  margin: 0 auto;
+  margin: 5px auto;
   background-color: white;
   .form-title {
     font-weight: bold;
@@ -77,4 +85,11 @@ ul {
 .error {
   color: red;
   font-weight: bold;
+}
+.bold {
+  font-weight: bold;
+}
+a {
+  color: $medium-blue;
+  padding: 0.5rem;
 }

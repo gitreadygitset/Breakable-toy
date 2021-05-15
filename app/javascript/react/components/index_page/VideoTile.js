@@ -12,7 +12,7 @@ const VideoTile = ({video, deleteVideo, userRole}) => {
 
   return (
     <div className="video-tile">
-      <Link to={`/videos/${video.id}`}>
+      <Link className="video-link"to={`/videos/${video.id}`}>
         <div className="grid-image-container">
           <img 
           src={video.thumbnail.url}
@@ -20,7 +20,7 @@ const VideoTile = ({video, deleteVideo, userRole}) => {
         </div>
         <h3>{video.title}</h3></Link>
         {userRole === "independent user" ? 
-          <button type="button" onClick={handleDeleteClick}><i className="far fa-trash-alt"></i></button>
+          <button onClick={handleDeleteClick}><i className="far fa-trash-alt"></i></button>
         : null }
     </div>
   )

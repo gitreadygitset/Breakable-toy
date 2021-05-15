@@ -145,31 +145,27 @@ const VideoShowContainer = (props) => {
           </div>
           <div className="forms">
           {sharesVisibility ?
-            <div className="shared-users">  
-              <VideoSharesContainer 
-                users={users} 
-                shareVideo={shareVideo}
-                unshare={unshare}
-                setFormErrors={setFormErrors}
-              />   
-            </div>
+            <VideoSharesContainer 
+              users={users} 
+              shareVideo={shareVideo}
+              unshare={unshare}
+              setFormErrors={setFormErrors}
+            />   
             : null}
             {questionsVisibility ?
-            <div className="questions">
-              <VideoQuestionsContainer 
-                questions={questions}
-                addQuestion={addQuestion}
-                deleteQuestion={deleteQuestion}
-                updateQuestion={updateQuestion}
-                setFormErrors={setFormErrors}
-                targetVideo={targetVideo}
-              /> 
-            </div>
+            <VideoQuestionsContainer 
+              questions={questions}
+              addQuestion={addQuestion}
+              deleteQuestion={deleteQuestion}
+              updateQuestion={updateQuestion}
+              setFormErrors={setFormErrors}
+              targetVideo={targetVideo}
+            /> 
             : null}  
           </div>
         </div>
         }
-        <Link to='/videos'>Back to my videos list</Link>
+        <Link className="home-link" to='/videos'>Back to my videos list</Link>
       </div>
     )
   }
