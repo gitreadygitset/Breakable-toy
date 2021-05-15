@@ -4,7 +4,7 @@ import QuestionTile from './QuestionTile'
 const VideoQuestionsContainer = ({setFormErrors, questions, updateQuestion, addQuestion, deleteQuestion, targetVideo}) => {
   const [questionFormData, setQuestionFormData] = useState({
     body: '', 
-    vid_timestamp: null,
+    vid_timestamp: "",
     question_id: null
   })
 
@@ -47,11 +47,14 @@ const VideoQuestionsContainer = ({setFormErrors, questions, updateQuestion, addQ
 
   const validForSubmission = () => {
     let submitErrors = [];
-    if (questionFormData["body"].trim() === "" && questionFormData["vid_timestamp"] === null) {
-      submitErrors = [
-        ...submitErrors,
-        "You must enter a question and/or a timestamp."
-      ];
+    if(typeof questionFormData["vid_timestamp"] === "string") {
+      if (questionFormData["body"].trim() === "" && questionFormData
+        ["vid_timestamp"].trim() === "") {
+          submitErrors = [
+            ...submitErrors,
+            "You must enter a question and/or a timestamp."
+          ];
+        }
     } else if (questionFormData["vid_timestamp"] && (questionFormData["vid_timestamp"] < 1 || questionFormData["vid_timestamp"]) > targetVideo.current.duration){
       submitErrors = [
         ...submitErrors,
