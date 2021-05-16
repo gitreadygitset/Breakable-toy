@@ -34,6 +34,14 @@ As of now, this CanDo reliably supports .mov and .mp4 video files encoded with t
 
 Text-to-speech is available on browsers that support the Web Audio API. Please make sure your browser is up to date to use the text-to-speech feature. This feature is not supported on Safari versions prior to 14.5 (released April 2021). 
 
+Please note that after hitting a video pause point one time on a video, you will need to refresh the page to hit it again (will not trigger if video playback time is manually reset.)
+
+### Known Issues - fixes in progress for:
+- Currently thumbnail capture does not work well for portrait-orientation videos
+- File attachment field display not clear after upload
+- Form errors may persist after closing the form, until page refresh
+- When adding multiple timestamps at once to a video, you may need to click play several times to "clear" the previously added pause points before the video will resume playing
+
 ## Features coming soon
 
 CanDo is designed to be small and easy to use, and everything you need to start making materials for your learners is ready to go! That said, there are still a few more exciting features in the works, including options to:
