@@ -53,6 +53,7 @@ CanDo is designed to be small and easy to use, and everything you need to start 
 - Embed videos from an external source like YouTube
 - Organize your videos by topic or learner, and search by title
 - Use the site on small-screen mobile devices
+- Activate and deactivate specific saved questions/pauses
 - Add answer choices to questions
        
 ### Miscellaneous
