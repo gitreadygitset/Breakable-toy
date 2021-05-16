@@ -8,13 +8,15 @@ The best way to see what it's all about is to visit [the Heroku site](https://ca
 
 - To see an "independent user" account:
 
-*Username: demo
-*Password: password
+*Username:* demo
+
+*Password:* password
 
 - To see a "supported user" account:
-- 
- *Username: demo-supported
- *Password: password
+
+ *Username:* demo-supported
+ 
+ *Password:* password
 
 ## Run CanDo locally
 
