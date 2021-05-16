@@ -41,6 +41,7 @@ Please note that after hitting a video pause point one time on a video, you will
 - File attachment field display not clear after upload
 - Form errors may persist after closing the form, until page refresh
 - When adding multiple timestamps at once to a video, you may need to click play several times to "clear" the previously added pause points before the video will resume playing
+- Blank stub pages remain when manually entering the URL of a deleted video
 
 ## Features coming soon
 
