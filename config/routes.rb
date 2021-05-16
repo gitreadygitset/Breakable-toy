@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  root "homes#authenticated"
+  root "homes#landing"
   get "/videos", to: "homes#authenticated"
   get "/videos/:id", to: "homes#authenticated"
+  user_session_path = "homes#authenticated"
 
   devise_for :users
    

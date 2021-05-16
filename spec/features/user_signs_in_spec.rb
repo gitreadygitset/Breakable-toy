@@ -11,7 +11,7 @@ feature 'user signs in' do
 
     click_button 'Log in'
 
-    expect(page).to have_content('Signed in successfully')
+    expect(page).to_not have_content('Log in')
     expect(page).to have_content('Sign Out')
   end
 
