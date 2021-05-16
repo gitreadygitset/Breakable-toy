@@ -27,8 +27,7 @@ You will need to have Ruby(v2.7.3), Rails, and PostegreSQL installed.
 5. Start the rails server with `rails server`
 6. In your browser, navigate to localhost:3000
 7. Create a user account, upload a video, and see what you can do! (see use instructions and notes below).
-  [![Codeship Status for gitreadygitset/Breakable-toy](https://app.codeship.com/projects/287a9f55-522b-4afa-af54-b823b6ce68dc/status?branch=master)](https://app.codeship.com/projects/443301)
-
+ 
 ## Technical notes
 
 As of now, this CanDo reliably supports .mov and .mp4 video files encoded with the H.264 codec. Please encode any H.265/HEVC high-definition videos to the H.264 standard before uploading to ensure cross-browser compatibility. On an iPhone, change your camera > settings > formats option to "Most compatible" before taking your video. Or, use your computer's video processing tool to change your high-def file's encoding (on a Mac, right-click the file and choose "Encode selected video files").
@@ -46,3 +45,4 @@ CanDo is designed to be small and easy to use, and everything you need to start 
 ### Miscellaneous
 
 Icons provided by Font Awesome, per [license](https://fontawesome.com/license)
+ [![Codeship Status for gitreadygitset/Breakable-toy](https://app.codeship.com/projects/287a9f55-522b-4afa-af54-b823b6ce68dc/status?branch=master)](https://app.codeship.com/projects/443301)
