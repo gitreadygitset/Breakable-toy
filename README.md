@@ -45,4 +45,5 @@ CanDo is designed to be small and easy to use, and everything you need to start 
 ### Miscellaneous
 
 Icons provided by Font Awesome, per [license](https://fontawesome.com/license)
+
  [![Codeship Status for gitreadygitset/Breakable-toy](https://app.codeship.com/projects/287a9f55-522b-4afa-af54-b823b6ce68dc/status?branch=master)](https://app.codeship.com/projects/443301)
