@@ -4,7 +4,7 @@ CanDo is a tool for creating custom video-based teaching materials. Tailored par
 
 ## Demo Site
 
-The best way to see what it's all about is to visit [the Heroku site](can-do.herokuapp.com). Create your own account, or log in with the following credentials to see some sample videos: 
+The best way to see what it's all about is to visit [the Heroku site](https://can-do.herokuapp.com/users/sign_in). Create your own account, or log in with the following credentials to see some sample videos: 
 
 - To see an "independent user" account
 *Username: demo
