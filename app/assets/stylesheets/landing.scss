@@ -1,0 +1,63 @@
+$dark-blue: hsla(225, 50%, 20%, 1);
+.landing-page {
+  background-image: url("/star-trails-1846734_1920.jpg");
+  background-position: center;
+  opacity: 0.95;
+  color: $dark-blue;
+}
+
+#landing-info {
+  font-size: 1.2rem;
+  border: 8px double hsl(292, 100%, 50%);
+  width: 65%;
+  margin: 3rem auto;
+  text-align: center;
+  padding: 0 3rem 3rem 3rem;
+  min-width: 430px;
+  max-width: 1000px;
+  background-color: white;
+  border-radius: 15px;
+  p {
+    margin: 2rem 0;
+    text-align: justify;
+  }
+  h2 {
+    margin-top: 2rem;
+    font-size: 1.8rem;
+  }
+  .landing-subtitle {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  ul {
+    list-style-type: square;
+    width: 80%;
+    margin: 0 auto 1rem;
+
+    li {
+      text-align: left;
+    }
+  }
+}
+#disclaimer {
+  font-style: italic;
+}
+.footer {
+  height: 5rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .icon-links {
+    text-align: center;
+  }
+
+  i {
+    padding: 0 0.5rem;
+  }
+}
+.underline {
+  text-decoration: underline;
+}

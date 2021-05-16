@@ -1,7 +1,8 @@
 $dark-blue: hsla(225, 50%, 20%, 1);
 $sandy: hsla(28, 82%, 75%, 1);
 
-.top-bar {
+.top-bar,
+.footer {
   background-color: $dark-blue;
   color: white;
   ul {
