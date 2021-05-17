@@ -40,13 +40,6 @@ Text-to-speech is available on browsers that support the Web Audio API. Please m
 
 Please note that after hitting a video pause point one time on a video, you will need to refresh the page to hit it again (will not trigger if video playback time is manually reset.)
 
-### Known Issues - fixes in progress for:
-- Currently thumbnail capture does not work well for portrait-orientation videos
-- File attachment field display not clear after upload
-- Form errors may persist after closing the form, until page refresh
-- When adding multiple timestamps at once to a video, you may need to click play several times to "clear" the previously added pause points before the video will resume playing
-- Blank stub pages remain when manually entering the URL of a deleted video
-
 ## Features coming soon
 
 CanDo is designed to be small and easy to use, and everything you need to start making materials for your learners is ready to go! That said, there are still a few more exciting features in the works, including options to:
@@ -55,7 +48,15 @@ CanDo is designed to be small and easy to use, and everything you need to start 
 - Use the site on small-screen mobile devices
 - Activate and deactivate specific saved questions/pauses
 - Add answer choices to questions
-       
+
+
+### Known Issues - fixes in progress for:
+- Thumbnail capture for portrait-orientation videos. 
+- File attachment field display does not clear after upload
+- Form errors persist after closing the form, until page refresh
+- When adding multiple timestamps at once to a video, user needs to click play several times to "clear" the previously added pause points before the video will resume playing. 
+- User sees a blank stub page when manually entering the URL of a deleted video
+    
 ### Miscellaneous
 
 Icons provided by Font Awesome, per [license](https://fontawesome.com/license)
