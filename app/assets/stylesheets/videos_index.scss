@@ -24,14 +24,17 @@ $sandy: hsla(28, 82%, 75%, 1);
     overflow: hidden;
     margin: 15px auto;
     width: 80%;
+    height: 60%;
     img {
       display: block;
-      width: 100%;
-      height: auto;
+      max-height: 100%;
+      max-width: 100%;
+      margin: 0 auto;
     }
   }
   h3 {
     font-size: 1.3rem;
+    padding: 0 0.3rem;
   }
 }
 .video-tile:hover {
