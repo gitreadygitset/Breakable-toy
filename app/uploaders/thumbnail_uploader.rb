@@ -14,10 +14,6 @@ class ThumbnailUploader < CarrierWave::Uploader::Base
   end
 
   def default_url()
-    if Rails.env.development? || Rails.env.test?
-      "/logo2-01.png"
-    else
-      "https://launch-breakable-toy-production.s3.amazonaws.com/Logo2-01.png"
-    end
+    "/Logo2-01.png"
   end
 end
