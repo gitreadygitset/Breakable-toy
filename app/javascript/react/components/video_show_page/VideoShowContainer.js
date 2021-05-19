@@ -136,7 +136,7 @@ const VideoShowContainer = (props) => {
         </div>
         {userRole === "supported user" ? null :
         <div className="editing-container">
-          <div className="show-buttons">
+          <div className="buttons">
             <button id="sharesToggle" className="margin" onClick={toggleShares}>Shared users</button>
             <button id="questionsToggle" className="margin" onClick={toggleQuestions}>Questions and pause points</button>
           </div>
