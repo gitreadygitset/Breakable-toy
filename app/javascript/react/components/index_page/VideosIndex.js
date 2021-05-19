@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import VideoTile from './VideoTile'
-import NewVideoForm from './NewVideoForm'
+import VideoUploadForm from './VideoUploadForm'
 import destroyVideo from '../../apiClient/destroyVideo'
 
 const VideosIndexContainer = (props) => {
@@ -10,7 +10,7 @@ const VideosIndexContainer = (props) => {
   const [videoFormData, setVideoFormData] = useState({
     title: "",
     video_url: "",
-    thumbnail: ""
+    thumbnail: "",
   })
  
   const fetchVideos = async() => {
@@ -98,10 +98,11 @@ const VideosIndexContainer = (props) => {
           </div> 
         {userRole === "supported user" ? null :  
         <div className="video-form">
-          <NewVideoForm 
+          <VideoUploadForm 
           setVideoFormData={setVideoFormData} 
           videoFormData={videoFormData} 
-          addVideo={addVideo}/>
+          addVideo={addVideo}
+          />
         </div>
         }
       </div>

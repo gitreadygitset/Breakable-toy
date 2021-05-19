@@ -9,6 +9,7 @@ body {
   color: $dark-blue;
   width: 100%;
 }
+
 button,
 [type="button"],
 [type="submit"] {
@@ -18,8 +19,10 @@ button,
   background-color: $sandy;
   color: $dark-blue;
   font-weight: bold;
+  width: auto;
 }
 button:hover,
+input[type="button"]:hover,
 input[type="submit"]:hover {
   border: 2px solid $dark-blue;
 }
