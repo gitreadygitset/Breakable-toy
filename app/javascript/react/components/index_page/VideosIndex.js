@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react"
 import VideoTile from './VideoTile'
 import VideoUploadForm from './VideoUploadForm'
 import destroyVideo from '../../apiClient/destroyVideo'
+import editVideoTitle from '../../apiClient/editVideoTitle'
+
 
 const VideosIndexContainer = (props) => {
   const [videoCount, setVideoCount] = useState(0)
@@ -63,9 +65,18 @@ const VideosIndexContainer = (props) => {
         existingVideo => existingVideo.video.id !== videoId);
       
       setVideos(remainingVideos);
+      setVideoCount(remainingVideos.length)
     }
   }
-  
+
+  const editTitle = async(videoTitle, videoId) => {
+    const editTitleResponse = await editVideoTitle(videoTitle.trim(), videoId)
+    const changeIndex = videos.findIndex(video => {return video.video.id === editTitleResponse.video.id});
+    const videosCopy = videos.map(video => video);
+    videosCopy[changeIndex] = editTitleResponse;
+    setVideos(videosCopy)
+  }
+
   const videoComponents = videos.map(video => {
     return (
       <VideoTile 
@@ -73,6 +84,7 @@ const VideosIndexContainer = (props) => {
       video={video.video} 
       deleteVideo={deleteVideo}
       userRole={userRole}
+      editTitle={editTitle}
       />
     )
   })

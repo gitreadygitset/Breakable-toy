@@ -8,7 +8,7 @@ Rails.application.routes.draw do
    
   namespace :api do
     namespace :v1 do
-      resources :videos, only: [:index, :create, :show, :destroy] do
+      resources :videos, only: [:index, :create, :show, :destroy, :update] do
         resources :questions, only: [:create, :destroy, :update]
         resources :video_shares, only: [:create, :destroy]
       end

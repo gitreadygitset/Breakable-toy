@@ -2,12 +2,14 @@ $dark-blue: hsla(225, 50%, 20%, 1);
 $sandy: hsla(28, 82%, 75%, 1);
 $green: hsla(125, 18%, 75%, 1);
 $medium-blue: hsla(225, 50%, 40%, 1);
+
 body {
   font: "Helvetica Neue", Helvetica, sans-serif;
   background-color: white;
   padding: 1rem;
   color: $dark-blue;
   width: 100%;
+  line-height: 1;
 }
 
 button,

@@ -52,6 +52,12 @@ class Api::V1::VideosController < ApplicationController
     render json: { message: "video removed" }, status: :ok
   end
 
+  def update
+    video = Video.find(params[:id])
+    video.update_attributes(title: params[:title])
+    render json: video
+  end
+
   private 
 
   def authorize_user
@@ -59,5 +65,8 @@ class Api::V1::VideosController < ApplicationController
     if current_user != video.uploader && !video.users.include?(current_user)
       render json: { error: 'You do not have access to this video' }, status: :forbidden
     end
+  end
+
+  def video_params
   end
 end
