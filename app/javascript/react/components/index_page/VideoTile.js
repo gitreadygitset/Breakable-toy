@@ -35,7 +35,14 @@ const VideoTile = ({video, deleteVideo, userRole, editTitle}) => {
         </div>
         <div>
         { editField ? 
-        <input type="text" id="title-edit" value={videoTitle} onChange={handleChange} onClick={handleInputClick} onBlur={handleEdit}/> :
+        <input 
+          type="text" 
+          id="title-edit" 
+          value={videoTitle} 
+          onChange={handleChange} 
+          onClick={handleInputClick} 
+          onBlur={handleEdit}
+          /> :
         <h3>{video.title}</h3> }
         </div>
       </Link>
