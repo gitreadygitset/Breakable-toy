@@ -13,7 +13,7 @@ const editQuestion = async(formData, videoId) => {
       const parsedEditQuestionResponse = await editQuestionResponse.json();
       return parsedEditQuestionResponse;
     } else {
-      throw new Error(`${addQuestionResponse.status}: ${addQuestionResponse.statusText}`)
+      throw new Error(`${editQuestionResponse.status}: ${editQuestionResponse.statusText}`)
     }
   } catch(error) {
     console.error(`Error in fetch: ${error.message}`)
