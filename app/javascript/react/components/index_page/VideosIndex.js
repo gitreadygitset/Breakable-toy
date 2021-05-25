@@ -3,11 +3,13 @@ import VideoTile from './VideoTile'
 import VideoUploadForm from './VideoUploadForm'
 import destroyVideo from '../../apiClient/destroyVideo'
 import editVideoTitle from '../../apiClient/editVideoTitle'
+import SearchBar from './SearchBar'
 
 
 const VideosIndexContainer = (props) => {
-  const [videoCount, setVideoCount] = useState(0)
+  const [displayedVideoCount, setDisplayedVideoCount] = useState(0)
   const [videos, setVideos] = useState([])
+  const [displayedVideos, setDisplayedVideos] = useState([])
   const [userRole, setUserRole] = useState(null);
   const [videoFormData, setVideoFormData] = useState({
     title: "",
@@ -21,8 +23,9 @@ const VideosIndexContainer = (props) => {
       if(videosResponse.ok){
         videosResponse = await videosResponse.json()
         setVideos(videosResponse.videos);
+        setDisplayedVideos(videosResponse.videos);
         setUserRole(videosResponse.role);
-        setVideoCount(videosResponse.videos.length)
+        setDisplayedVideoCount(videosResponse.videos.length) 
       } else {
         throw new Error(`${videosResponse.status}: ${videosResponse.statusText}`)
       }
@@ -77,7 +80,7 @@ const VideosIndexContainer = (props) => {
     setVideos(videosCopy)
   }
 
-  const videoComponents = videos.map(video => {
+  const videoComponents = displayedVideos.map(video => {
     return (
       <VideoTile 
       key={video.video.id} 
@@ -90,7 +93,7 @@ const VideosIndexContainer = (props) => {
   })
 
   const fillGrid = () => {
-    const numTiles = 9 - videoCount;
+    const numTiles = 9 - displayedVideoCount;
     const emptyTiles = [];
     for(let i=0; i < numTiles; i++){
       emptyTiles.push(<div className="video-tile empty"></div>)
@@ -107,16 +110,22 @@ const VideosIndexContainer = (props) => {
           <div className="video-grid">
             {videoComponents}
             {emptyTiles}
-          </div> 
-        {userRole === "supported user" ? null :  
+          </div>  
+         
         <div className="video-form">
+          <SearchBar 
+            videos={videos} 
+            setDisplayedVideos={setDisplayedVideos}
+            setDisplayedVideoCount = {setDisplayedVideoCount}
+          />
+          {userRole === "supported user" ? null : 
           <VideoUploadForm 
           setVideoFormData={setVideoFormData} 
           videoFormData={videoFormData} 
           addVideo={addVideo}
           />
-        </div>
         }
+        </div>
       </div>
     </div>
   )
