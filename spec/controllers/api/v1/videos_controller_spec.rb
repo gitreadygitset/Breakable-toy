@@ -61,7 +61,7 @@ RSpec.describe Api::V1::VideosController, type: :controller do
   describe "POST#create" do
     it "Should create a new video and return a JSON with its information" do
       sign_in user1
-      post s= {
+      post = {
           title: "uploaded video",
           video_url: fixture_file_upload('spec/fixtures/IMG_1404-1.mov', 'video/mov')
         }
