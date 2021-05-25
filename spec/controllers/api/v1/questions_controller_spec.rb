@@ -43,4 +43,27 @@ RSpec.describe Api::V1::QuestionsController, type: :controller do
       expect(Question.count). to eq(prev_count-1)
     end
   end
+
+  describe "POST#update" do 
+    it "Updates the question with new information" do
+      sign_in user1
+      post = {
+        question: {
+        body: "new body",
+        vid_timestamp: 12,
+        },
+        id: question1.id,
+        video_id: video1.id
+      }
+
+      prev_count = Question.count
+      post(:update, params: post)
+      returned_json = JSON.parse(response.body)
+
+      expect(response.status).to eq 200
+      expect(Question.count).to eq(prev_count)
+      expect(Question.find(question1.id)["body"]).to eq("new body")
+      expect(Question.find(question1.id)["vid_timestamp"]).to eq(12)
+    end
+  end
 end
